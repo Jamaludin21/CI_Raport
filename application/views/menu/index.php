@@ -11,9 +11,10 @@
 
     <!-- Title Page-->
     <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>assets/images/icon/logoypii.jpeg">
 
     <!-- Fontfaces CSS-->
-    <link href="<?= base_url('assets/css/font-face.css"'); ?>" rel="stylesheet" media="all">
+    <link href=" <?= base_url('assets/css/font-face.css"'); ?>" rel="stylesheet" media="all">
     <link href="<?= base_url('assets/vendor/font-awesome-4.7/css/font-awesome.min.css'); ?>" rel="stylesheet"
         media="all">
     <link href="<?= base_url('assets/vendor/font-awesome-5/css/fontawesome-all.min.css'); ?>" rel="stylesheet"
@@ -202,45 +203,27 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="assets/images/icon/jamal.jpg" alt="John Doe" />
+                                            <img src="assets/images/icon/logoypii.jpeg" alt="YPII" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn"
-                                                href="#"><?php echo $this->session->userdata("username"); ?></a>
+                                            <!-- <a class="js-acc-btn"
+                                                href="#"><?php echo $this->session->userdata("username"); ?></a> -->
+                                            <a> SMP YPII</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<?= base_url(); ?>assets/images/icon/jamal.jpg"
-                                                            alt="John Doe" />
+                                                        <img src="<?= base_url(); ?>assets/images/icon/logoypii.jpeg"
+                                                            alt="YPII" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a
-                                                            href="#"><?php echo $this->session->userdata("username"); ?></a>
+                                                        <a> SMP YPII</a>
                                                     </h5>
-                                                    <span class="email">jamaludinhakim21@gmail.com</span>
+                                                    <span class="email">smpypiibungur@gmail.com</span>
                                                 </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div> -->
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>

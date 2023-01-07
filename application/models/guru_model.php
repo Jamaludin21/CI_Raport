@@ -55,10 +55,12 @@ public function insert_entry($data)
 // }
 public function update_entry($data,$id)
 {
-	$this->db->update('guru', $data, ['id_guru' => $id]);
+		$this->db->where('id_guru', $id);
+	$this->db->update('guru', $data);
 }
 public function delete($id){
-	$this->db->delete('guru', array('id_guru' => $id));
+	$this->db->where('id_guru', $id);
+	$this->db->delete('guru');
 }
 }
 ?>

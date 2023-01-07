@@ -11,6 +11,7 @@
 
     <!-- Title Page-->
     <title>Forms</title>
+    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>assets/images/icon/logoypii.jpeg">
 
     <!-- Fontfaces CSS-->
     <link href="<?= base_url(); ?>assets/css/font-face.css" rel="stylesheet" media="all">
@@ -191,45 +192,36 @@
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
-                            <div class="account-wrap">
-                                <div class="account-item clearfix js-item-menu">
-                                    <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                    </div>
-                                    <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
-                                    </div>
-                                    <div class="account-dropdown js-dropdown">
-                                        <div class="info clearfix">
-                                            <div class="image">
-                                                <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                </a>
-                                            </div>
-                                            <div class="content">
-                                                <h5 class="name">
-                                                    <a href="#">john doe</a>
-                                                </h5>
-                                                <span class="email">johndoe@example.com</span>
-                                            </div>
+                            <!-- <a class="logo" href="index.php">
+                                <img src="images/icon/logoypii.jpeg" style="width:100px;height:75px;"
+                                    alt="KampusMengajar" />
+                            </a> -->
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img src="assets/images/icon/logoypii.jpeg" alt="YPII" />
                                         </div>
-                                        <div class="account-dropdown__body">
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-account"></i>Account</a>
-                                            </div>
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-settings"></i>Setting</a>
-                                            </div>
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                            </div>
+                                        <div class="content">
+                                            <!-- <a class="js-acc-btn"
+                                                href="#"><?php echo $this->session->userdata("username"); ?></a> -->
+                                            <a> SMP YPII</a>
                                         </div>
-                                        <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img src="<?= base_url(); ?>assets/images/icon/logoypii.jpeg"
+                                                            alt="YPII" />
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a> SMP YPII</a>
+                                                    </h5>
+                                                    <span class="email">smpypiibungur@gmail.com</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -253,61 +245,92 @@
                                             <h3 class="text-center title-2">SMP YPII Bungur Bekasi</h3>
                                         </div>
                                         <hr>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="select" class=" form-control-label">Pilih Kelas</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="kelas" id="pilih_kelas" class="form-control">
+                                                    <option value=""></option>
+                                                    <?php foreach ($data_nilai as $key) : ?>
+                                                    <option id="select_kelas" value="<?= $key['id_nilai'] ?>">
+                                                        <?= $key['kelas'] ?>
+                                                    </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="select" class=" form-control-label">Pilih Absen
+                                                    Siswa</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="absen" id="pilih_absen" class="form-control">
+                                                    <option value="">Belum ada pilihan</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <form action="<?= base_url('add_form'); ?>" method="post">
-                                            <div class="row">
+                                            <div class="row" id="show_biodata">
                                                 <div class="col-6">
                                                     <div class="form-group">
+                                                        <input type="hidden" name="id_nilai" id="id_nilai"
+                                                            class="form-control">
                                                         <label for="nama" class="control-label mb-1">Nama Siswa</label>
-                                                        <input id="name" name="nama_siswa" type="text"
+                                                        <input id="name_show" name="nama" type="text"
                                                             class="form-control" aria-required="true"
-                                                            aria-invalid="false">
+                                                            aria-invalid="false" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="kelas" class="control-label mb-1">Kelas</label>
-                                                        <input id="kelas" name="kelas" type="text" class="form-control"
-                                                            aria-required="true" aria-invalid="false">
+                                                        <input id="kelas_show" name="kelas" type="text"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="nisn" class="control-label mb-1">NISN</label>
-                                                        <input id="nisn" name="nisn" type="number" class="form-control"
-                                                            aria-required="true" aria-invalid="false">
+                                                        <input id="nisn_show" name="nisn" type="number"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="semester"
                                                             class="control-label mb-1">Semester</label>
-                                                        <input id="semester" name="semester" type="text"
+                                                        <input id="semester_show" name="semester" type="text"
                                                             class="form-control" aria-required="true"
-                                                            aria-invalid="false">
+                                                            aria-invalid="false" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="sekolah" class="control-label mb-1">Sekolah</label>
-                                                        <input id="sekolah" name="sekolah" type="text"
+                                                        <input id="sekolah_show" name="sekolah" type="text"
                                                             class="form-control" aria-required="true"
-                                                            aria-invalid="false">
+                                                            aria-invalid="false" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="tahun" class="control-label mb-1">Tahun
                                                             Pelajaran</label>
-                                                        <input id="tahun" name="tahun_pelajaran" type="text"
+                                                        <input id="tahun_show" name="tahun_pelajaran" type="text"
                                                             class="form-control" aria-required="true"
-                                                            aria-invalid="false">
+                                                            aria-invalid="false" disabled>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="alamat" class="control-label mb-1">Alamat</label>
-                                                <textarea id="alamat" name="alamat" type="text" class="form-control"
-                                                    aria-required="true" aria-invalid="false">
+                                            <div class="form-group" id="show_biodata">
+                                                <label for="alamat_siswa" class="control-label mb-1">Alamat</label>
+                                                <textarea id="alamat_siswa_show" name="alamat_siswa" type="text"
+                                                    class="form-control" aria-required="true" aria-invalid="false"
+                                                    disabled>
 												</textarea>
                                             </div>
                                             <div class="card-title">
@@ -365,8 +388,9 @@
                                                         <br>
                                                         <label for="na_agama" class="control-label mb-1">Nilai
                                                             Akhir</label>
-                                                        <input id="agama" name="agama" type="text" class="form-control"
-                                                            aria-required="true" aria-invalid="false">
+                                                        <input id="na_agama" name="na_agama" type="text"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false">
                                                         <label for="kompetensi_agama" class="control-label mb-1">Capaian
                                                             Kompetensi</label>
                                                         <input id="kompetensi_agama" name="kompetensi_agama" type="text"
@@ -635,7 +659,218 @@
 
     <!-- Main JS-->
     <script src="<?= base_url(); ?>assets/js/main.js"></script>
+    <script>
+    $(document).ready(function() {
 
+        $('#pilih_kelas').change(function() {
+            var id = $(this).val();
+            $.ajax({
+                url: "<?= base_url("Ajax/detail_kelas_absen"); ?>",
+                method: "POST",
+                dataType: 'JSON',
+                data: {
+                    id_nilai: id
+                },
+                success: function(data) {
+                    // console.log(data);
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option value=' + data[i].id_nilai + '>' +
+                            data[i].absen + '</option>';
+                    }
+                    $('#pilih_absen').html(html);
+                }
+            });
+            // return false;
+        });
+
+    });
+
+
+    // $(document).on('change', '#pilih_absen', function() {
+    //     let id = $(this).attr('data');
+    //     $.ajax({
+    //         url: '<?= base_url("Ajax/detail_form"); ?>',
+    //         type: 'GET',
+    //         dataType: 'JSON',
+    //         data: {
+    //             "id_nilai": id,
+    //         },
+    //         success: results => {
+    //             console.log(results);
+    //             $('#name_show').val(results[0].nama);
+    //             $('#kelas_show').val(results[0].kelas);
+    //             $('#nisn_show').val(results[0].nisn);
+    //             $('#semester_show').val(results[0].semester);
+    //             $('#sekolah_show').val(results[0].sekolah);
+    //             $('#tahun_pelajaran_show').val(results[0].tahun_pelajaran);
+    //             $('#alamat_siswa_show').val(results[0].alamat_siswa);
+    //             $('#id_nilai').val(id);
+
+    //             $('#show_biodata').html('show');
+    //         }
+    //     });
+
+
+    // });
+    $(document).ready(function() {
+        $('#pilih_kelas').change(function() {
+            var id = $(this).val();
+            var nama_siswa = $(this).attr("nama");
+            var kelas = $(this).attr("kelas");
+            var nisn = $(this).attr("nisn");
+            var smeester = $(this).attr("semester");
+            var sekolah = $(this).attr("sekolah");
+            var tahun_pelajaran = $(this).attr("tahun_pelajaran");
+            var alamat_siswa = $(this).attr("alamat_siswa");
+            $.ajax({
+                url: '<?= base_url("Ajax/detail_form"); ?>',
+                type: 'GET',
+                dataType: 'JSON',
+                data: {
+                    "id_nilai": id,
+                },
+                success: results => {
+                    let html = '';
+                    results.forEach((response) => {
+                        console.log(results);
+                        html +=
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "nama" class = "control-label mb-1" > Nama Siswa </label>' +
+                            '<input id = "name_show" name = "nama" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.nama + ' disabled >' +
+                            '</div> </div>' + '<div class="col-6">' +
+                            '<div class = "form-group" >' +
+                            '<label for = "kelas" class = "control-label mb-1" > Kelas </label>' +
+                            '<input id = "kelas_show" name = "kelas" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.kelas + ' disabled >' +
+                            '</div> </div>' + '<div class="col-6">' +
+                            '<div class = "form-group" >' +
+                            '<label for = "nisn" class = "control-label mb-1" > NISN </label>' +
+                            '<input id = "nisn_show" name = "nisn" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.nisn + ' disabled >' + '</div> </div>' +
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "semester" class = "control-label mb-1" > Semester </label>' +
+                            '<input id = "semester_show" name = "semester" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.semester + ' disabled >' + '</div> </div>' +
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "sekolah" class = "control-label mb-1" > Sekolah </label>' +
+                            '<input id = "sekolah_show" name = "sekolah" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.sekolah + ' disabled >' + '</div> </div>' +
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "tahun_pelajaran" class = "control-label mb-1" > Tahun Pelajaran </label>' +
+                            '<input id = "tahun_pelajaran_show" name = "tahun_pelajaran" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.tahun_pelajaran + ' disabled >' +
+                            '</div> </div>';
+                        // $('#name_show').val(results[0].nama_siswa);
+                        // $('#kelas_show').val(results[0].kelas);
+                        // $('#nisn_show').val(results[0].nisn);
+                        // $('#semester_show').val(results[0].semester);
+                        // $('#sekolah_show').val(results[0].sekolah);
+                        // $('#tahun_pelajaran_show').val(results[0].tahun_pelajaran);
+                        // $('#alamat_siswa_show').val(results[0].alamat_siswa);
+                        // $('#id_nilai').val(id);
+
+                        $('#show_biodata').html(html);
+                    });
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $('#pilih_absen').change(function() {
+            var id = $(this).val();
+            var nama_siswa = $(this).attr("nama");
+            var kelas = $(this).attr("kelas");
+            var nisn = $(this).attr("nisn");
+            var smeester = $(this).attr("semester");
+            var sekolah = $(this).attr("sekolah");
+            var tahun_pelajaran = $(this).attr("tahun_pelajaran");
+            var alamat_siswa = $(this).attr("alamat_siswa");
+            $.ajax({
+                url: '<?= base_url("Ajax/detail_form"); ?>',
+                type: 'GET',
+                dataType: 'JSON',
+                data: {
+                    "id_nilai": id,
+                },
+                success: results => {
+                    let html = '';
+                    results.forEach((response) => {
+                        console.log(results);
+                        html +=
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "nama" class = "control-label mb-1" > Nama Siswa </label>' +
+                            '<input id = "name_show" name = "nama" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.nama + ' disabled >' +
+                            '</div> </div>' + '<div class="col-6">' +
+                            '<div class = "form-group" >' +
+                            '<label for = "kelas" class = "control-label mb-1" > Kelas </label>' +
+                            '<input id = "kelas_show" name = "kelas" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.kelas + ' disabled >' +
+                            '</div> </div>' + '<div class="col-6">' +
+                            '<div class = "form-group" >' +
+                            '<label for = "nisn" class = "control-label mb-1" > NISN </label>' +
+                            '<input id = "nisn_show" name = "nisn" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.nisn + ' disabled >' + '</div> </div>' +
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "semester" class = "control-label mb-1" > Semester </label>' +
+                            '<input id = "semester_show" name = "semester" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.semester + ' disabled >' + '</div> </div>' +
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "sekolah" class = "control-label mb-1" > Sekolah </label>' +
+                            '<input id = "sekolah_show" name = "sekolah" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.sekolah + ' disabled >' + '</div> </div>' +
+                            '<div class="col-6">' + '<div class = "form-group" >' +
+                            '<label for = "tahun_pelajaran" class = "control-label mb-1" > Tahun Pelajaran </label>' +
+                            '<input id = "tahun_pelajaran_show" name = "tahun_pelajaran" type = "text" class = "form-control" aria - required = "true" aria - invalid = "false" placeholder=' +
+                            response.tahun_pelajaran + ' disabled >' +
+                            '</div> </div>';
+                        // $('#name_show').val(results[0].nama_siswa);
+                        // $('#kelas_show').val(results[0].kelas);
+                        // $('#nisn_show').val(results[0].nisn);
+                        // $('#semester_show').val(results[0].semester);
+                        // $('#sekolah_show').val(results[0].sekolah);
+                        // $('#tahun_pelajaran_show').val(results[0].tahun_pelajaran);
+                        // $('#alamat_siswa_show').val(results[0].alamat_siswa);
+                        // $('#id_nilai').val(id);
+
+                        $('#show_biodata').html(html);
+                    });
+                }
+            });
+        });
+    });
+    // $(document).on('click', 'select_absen', function() {
+    //     let id = $(this).attr('data');
+    //     $.ajax({
+    //         url: '<?= base_url("Ajax/detail_form"); ?>',
+    //         type: 'GET',
+    //         dataType: 'JSON',
+    //         data: {
+    //             "id_nilai": id,
+    //         },
+    //         success: results => {
+    //             console.log(results);
+    //             // $('#pilih_absen').val(results[0].absen);
+    //             $('#name_show').val(results[0].nama);
+    //             $('#kelas_show').val(results[0].kelas);
+    //             $('#nisn_show').val(results[0].nisn);
+    //             $('#semester_show').val(results[0].semester);
+    //             $('#sekolah_show').val(results[0].sekolah);
+    //             $('#tahun_pelajaran_show').val(results[0].tahun_pelajaran);
+    //             $('#alamat_siswa_show').val(results[0].alamat_siswa);
+    //             $('#id_nilai').val(id);
+
+    //             $('#show_biodata').html('html');
+    //         }
+    //     });
+
+
+    // });
+    </script>
 </body>
 
 </html>

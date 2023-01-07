@@ -126,24 +126,25 @@ class Siswa_viii_model extends CI_Model {
 			],
 		];
 	}
-public function get()
-{
-	return $this->db->get_where('siswa_viii' , ['kelas' => 8])->result();
-}
-
-public function insert_entry($data)
-{
-	return $this->db->insert('siswa_viii', $data);
-}
-
-public function update_entry()
-{
-		// $this->title    = $_POST['title'];
-		// $this->content  = $_POST['content'];
-		// $this->date     = time();
-
-		// $this->db->update('entries', $this, array('id' => $_POST['id']));
-}
+	public function get()
+	{
+		return $this->db->order_by('absen', 'asc')->get_where('nilai_siswa' , ['kelas' => '8'])->result();
+	}
+	
+	public function insert_entry($data)
+	{
+		return $this->db->insert('nilai_siswa', $data);
+	}
+	
+	public function update_entry($data, $id)
+	{
+		$this->db->where('id_nilai', $id);
+		$this->db->update('nilai_siswa', $data);
+	}
+	public function delete($id){
+		$this->db->where('id_nilai', $id);
+		$this->db->delete('nilai_siswa');
+	}
 
 }
 ?>

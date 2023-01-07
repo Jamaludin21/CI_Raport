@@ -20,13 +20,10 @@ public function insert_entry()
 		// $this->db->insert('entries', $this);
 }
 
-public function update_entry()
+public function update_entry($data, $id)
 {
-		// $this->title    = $_POST['title'];
-		// $this->content  = $_POST['content'];
-		// $this->date     = time();
-
-		// $this->db->update('entries', $this, array('id' => $_POST['id']));
+	$this->db->where('id_mapel', $id);
+	$this->db->update('mata_pelajaran', $data);
 }
 
 }

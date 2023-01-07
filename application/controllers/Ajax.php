@@ -11,12 +11,12 @@ class Ajax extends CI_Controller
 		$this->load->model("guru_model", "gm");
 		
 
-		$guru = $this->input->post("nama_guru");
+		$guru = $this->input->post("nama");
 		$jabatan = $this->input->post("jabatan");
 		$nikg = $this->input->post("nikg");
 
 		$data = [
-			"nama_guru" => $guru,
+			"nama" => $guru,
 			"jabatan" => $jabatan,
 			"nikg" => $nikg
 		];
@@ -27,25 +27,87 @@ class Ajax extends CI_Controller
 		echo json_encode(true);
 }
 
+public function detail_guru()
+{
+		$this->db->where('id_guru', $this->input->get('id_guru'));
+		$data = $this->db->get('guru')->result();
+		echo json_encode($data);
+}
+
+public function edit_guru(){
+		$this->load->model('guru_model', 'gm');
+		// $id = $this->input->post('id_guru');
+		$id = $this->input->post('id_guru');
+		$nama_guru = $this->input->post('nama');
+		$jabatan = $this->input->post('jabatan');
+		$nikg = $this->input->post('nikg');
+		$data = [
+            'nama' => $nama_guru,
+            'jabatan' => $jabatan,
+            'nikg' => $nikg,
+		];
+		// var_dump($id, $data);
+		$this->gm->update_entry($data, $id);
+		redirect(base_url('tabel'));
+		echo json_encode(true);
+}
+
+public function hapus_guru(){
+	$this->load->model("guru_model", "gm");
+		
+		$id = $this->input->post("id_guru");
+		$this->gm->delete($id);
+		echo json_encode(true);
+}
+
+
+public function detail_kelas_absen()
+{
+	    $this->load->model("form_model", "fm");
+		// $this->db->where('id_nilai', $this->input->get('id_nilai'));
+		// $data = $this->db->get('nilai_siswa')->result();
+		// echo json_encode($data);
+		// $id = $this->input->post('id_nilai');
+		$data = $this->fm->get_data_absen_vii();
+		$data = $this->fm->get_data_absen_viii();
+		$data = $this->fm->get_data_absen_ix();
+		echo json_encode($data);
+}
+
+public function detail_form()
+{
+	    $this->load->model("form_model", "fm");
+		$this->db->where('id_nilai', $this->input->get('id_nilai'));
+		$data = $this->db->get('nilai_siswa')->result();
+		echo json_encode($data);
+}
+
+public function detail_absen()
+{
+	    $this->load->model("form_model", "fm");
+		$this->db->where('id_nilai', $this->input->get('id_nilai'));
+		$data = $this->db->get('nilai_siswa')->result();
+		echo json_encode($data);
+}
 public function add_form()
 {
 		$this->load->model("form_model", "fm");
 		
 
-		$nama_siswa = $this->input->post("nama_siswa");
-		$kelas = $this->input->post("kelas");
-		$nisn = $this->input->post("nisn");
-		$semester = $this->input->post("semester");
-		$sekolah = $this->input->post("sekolah");
-		$tahun = $this->input->post("tahun_pelajaran");
-		$alamat = $this->input->post("alamat");
+		// $nama_siswa = $this->input->post("nama");
+		// $kelas = $this->input->post("kelas");
+		// $nisn = $this->input->post("nisn");
+		// $semester = $this->input->post("semester");
+		// $sekolah = $this->input->post("sekolah");
+		// $tahun = $this->input->post("tahun_pelajaran");
+		// $alamat = $this->input->post("alamat");
 		$taqwa = $this->input->post("taqwa");
 		$mandiri = $this->input->post("mandiri");
 		$gotong = $this->input->post("gotong_royong");
 		$kreatif = $this->input->post("kreatif");
 		$kritis = $this->input->post("kritis");
 		$bineka = $this->input->post("bineka");
-		$agama = $this->input->post("agama");
+		$agama = $this->input->post("na_agama");
 		$komp_agama = $this->input->post("kompetensi_agama");
 		$pkn = $this->input->post("pkn");
 		$komp_pkn = $this->input->post("kompetensi_pkn");
@@ -73,20 +135,20 @@ public function add_form()
 		$catatan_wakel = $this->input->post("catatan_wakel");
 
 		$data = [
-			"nama_siswa" => $nama_siswa,
-			"kelas" => $kelas,
-			"nisn" => $nisn,
-			"semester" => $semester,
-			"sekolah" =>$sekolah,
-			"tahun_pelajaran" => $tahun,
-			"alamat" => $alamat,
+			// "nama" => $nama_siswa,
+			// "kelas" => $kelas,
+			// "nisn" => $nisn,
+			// "semester" => $semester,
+			// "sekolah" =>$sekolah,
+			// "tahun_pelajaran" => $tahun,
+			// "alamat" => $alamat,
 			"taqwa" => $taqwa,
 			"mandiri" => $mandiri,
 			"gotong_royong" => $gotong,
 			"kreatif" => $kreatif,
 			"kritis" => $kritis,
 			"bineka" => $bineka,
-			"agama" => $agama,
+			"na_agama" => $agama,
 			"kompetensi_agama" => $komp_agama,
 			"pkn" => $pkn,
 			"kompetensi_pkn" => $komp_pkn,
@@ -126,16 +188,22 @@ public function add_kelas_vii()
 		
 
 		$nama_siswa = $this->input->post("nama");
+		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
 		$nis = $this->input->post("nis");
+		$semester = $this->input->post("semester");
+		$sekolah = $this->input->post("sekolah");
+		$tahun_pelajaran = $this->input->post("tahun_pelajaran");
 		$tempat_lahir = $this->input->post("tempat_lahir");
 		$tanggal_lahir = $this->input->post("tanggal_lahir");
+		$kelamin = $this->input->post('kelamin');
+		$telp_siswa = $this->input->post('telp_siswa');
 		$agama = $this->input->post("agama");
 		$status_keluarga = $this->input->post("status_keluarga");
 		$anak_ke = $this->input->post("anak_ke");
 		$alamat_siswa = $this->input->post("alamat_siswa");
-		$sekolah = $this->input->post("sekolah_asal");
+		$sekolah_asal = $this->input->post("sekolah_asal");
 		$pada_kelas = $this->input->post("pada_kelas");
 		$pada_tanggal = $this->input->post("pada_tanggal");
 		$nama_ayah = $this->input->post("nama_ayah");
@@ -149,17 +217,25 @@ public function add_kelas_vii()
 		$pekerjaan_wali = $this->input->post("pekerjaan_wali");
 		$alamat_wali = $this->input->post("alamat_wali");
 
+		// $kd_kelas = "K-00" . rand();
+
 		$data = [
 			"nama" => $nama_siswa,
+			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
 			"nis" => $nis,
+			"semester" => $semester,
+			"sekolah" => $sekolah,
+			"tahun_pelajaran" => $tahun_pelajaran,
 			"tempat_lahir" =>$tempat_lahir,
 			"tanggal_lahir" => $tanggal_lahir,
+			"kelamin" => $kelamin,
+			"telp_siswa" => $telp_siswa,
 			"agama" => $agama,
 			"status_keluarga" => $status_keluarga,
 			"anak_ke" => $anak_ke,
-			"sekolah_asal" => $sekolah,
+			"sekolah_asal" => $sekolah_asal,
 			"kelas" => $kelas,
 			"pada_kelas" => $pada_kelas,
 			"pada_tanggal" => $pada_tanggal,
@@ -177,25 +253,44 @@ public function add_kelas_vii()
 
 		$this->s7->insert_entry($data);
 
+		// $datakelas =
+		// [
+		// 	"kd_kelas" => $kd_kelas,
+		// 	"keterangan" => $kelas,
+		// ];
+		// $this->db->insert('ms_kelas', $datakelas);
+
 
 		return redirect(base_url('tabel_siswa_vii'));
 }
-public function add_kelas_viii()
-{
-	$this->load->model("siswa_vii_model", "s8");
-		
 
+public function detail_kelas_vii()
+{
+		$this->db->where('id_nilai', $this->input->get('id_nilai'));
+		$data = $this->db->get('nilai_siswa', ['kelas' => '7'])->result();
+		echo json_encode($data);
+}
+public function edit_kelas_vii()
+{
+	$this->load->model("siswa_vii_model", "s7");
+	    $id = $this->input->post('id_nilai');
 		$nama_siswa = $this->input->post("nama");
+		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
 		$nis = $this->input->post("nis");
+		$semester = $this->input->post("semester");
+		$sekolah = $this->input->post("sekolah");
+		$tahun_pelajaran = $this->input->post("tahun_pelajaran");
 		$tempat_lahir = $this->input->post("tempat_lahir");
 		$tanggal_lahir = $this->input->post("tanggal_lahir");
+		$kelamin = $this->input->post('kelamin');
+		$telp_siswa = $this->input->post('telp_siswa');
 		$agama = $this->input->post("agama");
 		$status_keluarga = $this->input->post("status_keluarga");
 		$anak_ke = $this->input->post("anak_ke");
 		$alamat_siswa = $this->input->post("alamat_siswa");
-		$sekolah = $this->input->post("sekolah_asal");
+		$sekolah_asal = $this->input->post("sekolah_asal");
 		$pada_kelas = $this->input->post("pada_kelas");
 		$pada_tanggal = $this->input->post("pada_tanggal");
 		$nama_ayah = $this->input->post("nama_ayah");
@@ -211,15 +306,99 @@ public function add_kelas_viii()
 
 		$data = [
 			"nama" => $nama_siswa,
+			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
 			"nis" => $nis,
+			"semester" => $semester,
+			"sekolah" => $sekolah,
+			"tahun_pelajaran" => $tahun_pelajaran,
 			"tempat_lahir" =>$tempat_lahir,
 			"tanggal_lahir" => $tanggal_lahir,
+			"kelamin" => $kelamin,
+			"telp_siswa" => $telp_siswa,
 			"agama" => $agama,
 			"status_keluarga" => $status_keluarga,
 			"anak_ke" => $anak_ke,
-			"sekolah_asal" => $sekolah,
+			"sekolah_asal" => $sekolah_asal,
+			"kelas" => $kelas,
+			"pada_kelas" => $pada_kelas,
+			"pada_tanggal" => $pada_tanggal,
+			"nama_ayah" => $nama_ayah,
+			"nama_ibu" => $nama_ibu,
+			"telp_orangtua" => $telp_ortu,
+			"kerja_ayah" => $kerja_ayah,
+			"kerja_ibu" => $kerja_ibu,
+			"alamat_orangtua" => $alamat_orangtua,
+			"nama_wali" => $nama_wali,
+			"telp_wali" => $telp_wali,
+			"pekerjaan_wali" => $pekerjaan_wali,
+			"alamat_wali" => $alamat_wali,
+		];
+
+		$this->s7->update_entry($data, $id);
+		// var_dump($data, $id);
+		redirect(base_url('tabel_siswa_vii'));
+}
+public function hapus_kelas_vii(){
+	$this->load->model("siswa_vii_model", "s7");
+		
+		$id = $this->input->post("id_nilai");
+		$this->s7->delete($id);
+		echo json_encode(true);
+}
+public function add_kelas_viii()
+{
+	$this->load->model("siswa_vii_model", "s8");
+		
+
+		$nama_siswa = $this->input->post("nama");
+		$absensi = $this->input->post("absen");
+		$kelas = $this->input->post("kelas");
+		$nisn = $this->input->post("nisn");
+		$nis = $this->input->post("nis");
+		$semester = $this->input->post("semester");
+		$sekolah = $this->input->post("sekolah");
+		$tahun_pelajaran = $this->input->post("tahun_pelajaran");
+		$tempat_lahir = $this->input->post("tempat_lahir");
+		$tanggal_lahir = $this->input->post("tanggal_lahir");
+		$kelamin = $this->input->post('kelamin');
+		$telp_siswa = $this->input->post('telp_siswa');
+		$agama = $this->input->post("agama");
+		$status_keluarga = $this->input->post("status_keluarga");
+		$anak_ke = $this->input->post("anak_ke");
+		$alamat_siswa = $this->input->post("alamat_siswa");
+		$sekolah_asal = $this->input->post("sekolah_asal");
+		$pada_kelas = $this->input->post("pada_kelas");
+		$pada_tanggal = $this->input->post("pada_tanggal");
+		$nama_ayah = $this->input->post("nama_ayah");
+		$nama_ibu = $this->input->post("nama_ibu");
+		$telp_ortu = $this->input->post("telp_orangtua");
+		$kerja_ayah = $this->input->post("kerja_ayah");
+		$kerja_ibu = $this->input->post("kerja_ibu");
+		$alamat_orangtua = $this->input->post("alamat_orangtua");
+		$nama_wali = $this->input->post("nama_wali");
+		$telp_wali = $this->input->post("telp_wali");
+		$pekerjaan_wali = $this->input->post("pekerjaan_wali");
+		$alamat_wali = $this->input->post("alamat_wali");
+
+		$data = [
+			"nama" => $nama_siswa,
+			"absen" => $absensi,
+			"alamat_siswa" => $alamat_siswa,
+			"nisn" => $nisn,
+			"nis" => $nis,
+			"semester" => $semester,
+			"sekolah" => $sekolah,
+			"tahun_pelajaran" => $tahun_pelajaran,
+			"tempat_lahir" =>$tempat_lahir,
+			"tanggal_lahir" => $tanggal_lahir,
+			"kelamin" => $kelamin,
+			"telp_siswa" => $telp_siswa,
+			"agama" => $agama,
+			"status_keluarga" => $status_keluarga,
+			"anak_ke" => $anak_ke,
+			"sekolah_asal" => $sekolah_asal,
 			"kelas" => $kelas,
 			"pada_kelas" => $pada_kelas,
 			"pada_tanggal" => $pada_tanggal,
@@ -240,22 +419,33 @@ public function add_kelas_viii()
 
 		return redirect(base_url('tabel_siswa_viii'));
 }
-public function add_kelas_ix()
+public function detail_kelas_viii()
 {
-	$this->load->model("siswa_vii_model", "s9");
-		
-
+		$this->db->where('id_nilai', $this->input->get('id_nilai'));
+		$data = $this->db->get('nilai_siswa', ['kelas' => '8'])->result();
+		echo json_encode($data);
+}
+public function edit_kelas_viii()
+{
+	$this->load->model("siswa_viii_model", "s8");
+	    $id = $this->input->post('id_nilai');
 		$nama_siswa = $this->input->post("nama");
+		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
 		$nis = $this->input->post("nis");
+		$semester = $this->input->post("semester");
+		$sekolah = $this->input->post("sekolah");
+		$tahun_pelajaran = $this->input->post("tahun_pelajaran");
 		$tempat_lahir = $this->input->post("tempat_lahir");
 		$tanggal_lahir = $this->input->post("tanggal_lahir");
+		$kelamin = $this->input->post('kelamin');
+		$telp_siswa = $this->input->post('telp_siswa');
 		$agama = $this->input->post("agama");
 		$status_keluarga = $this->input->post("status_keluarga");
 		$anak_ke = $this->input->post("anak_ke");
 		$alamat_siswa = $this->input->post("alamat_siswa");
-		$sekolah = $this->input->post("sekolah_asal");
+		$sekolah_asal = $this->input->post("sekolah_asal");
 		$pada_kelas = $this->input->post("pada_kelas");
 		$pada_tanggal = $this->input->post("pada_tanggal");
 		$nama_ayah = $this->input->post("nama_ayah");
@@ -271,15 +461,100 @@ public function add_kelas_ix()
 
 		$data = [
 			"nama" => $nama_siswa,
+			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
 			"nis" => $nis,
+			"semester" => $semester,
+			"sekolah" => $sekolah,
+			"tahun_pelajaran" => $tahun_pelajaran,
 			"tempat_lahir" =>$tempat_lahir,
 			"tanggal_lahir" => $tanggal_lahir,
+			"kelamin" => $kelamin,
+			"telp_siswa" => $telp_siswa,
 			"agama" => $agama,
 			"status_keluarga" => $status_keluarga,
 			"anak_ke" => $anak_ke,
-			"sekolah_asal" => $sekolah,
+			"sekolah_asal" => $sekolah_asal,
+			"kelas" => $kelas,
+			"pada_kelas" => $pada_kelas,
+			"pada_tanggal" => $pada_tanggal,
+			"nama_ayah" => $nama_ayah,
+			"nama_ibu" => $nama_ibu,
+			"telp_orangtua" => $telp_ortu,
+			"kerja_ayah" => $kerja_ayah,
+			"kerja_ibu" => $kerja_ibu,
+			"alamat_orangtua" => $alamat_orangtua,
+			"nama_wali" => $nama_wali,
+			"telp_wali" => $telp_wali,
+			"pekerjaan_wali" => $pekerjaan_wali,
+			"alamat_wali" => $alamat_wali,
+		];
+
+		$this->s8->update_entry($data, $id);
+		// var_dump($data, $id);
+		redirect(base_url('tabel_siswa_viii'));
+}
+	public function hapus_kelas_viii()
+	{
+		$this->load->model("siswa_viii_model", "s8");
+
+		$id = $this->input->post("id_nilai");
+		$this->s8->delete($id);
+		echo json_encode(true);
+	}
+public function add_kelas_ix()
+{
+	$this->load->model("siswa_vii_model", "s9");
+		
+
+		$nama_siswa = $this->input->post("nama");
+		$absensi = $this->input->post("absen");
+		$kelas = $this->input->post("kelas");
+		$nisn = $this->input->post("nisn");
+		$nis = $this->input->post("nis");
+		$semester = $this->input->post("semester");
+		$sekolah = $this->input->post("sekolah");
+		$tahun_pelajaran = $this->input->post("tahun_pelajaran");
+		$tempat_lahir = $this->input->post("tempat_lahir");
+		$tanggal_lahir = $this->input->post("tanggal_lahir");
+		$kelamin = $this->input->post('kelamin');
+		$telp_siswa = $this->input->post('telp_siswa');
+		$agama = $this->input->post("agama");
+		$status_keluarga = $this->input->post("status_keluarga");
+		$anak_ke = $this->input->post("anak_ke");
+		$alamat_siswa = $this->input->post("alamat_siswa");
+		$sekolah_asal = $this->input->post("sekolah_asal");
+		$pada_kelas = $this->input->post("pada_kelas");
+		$pada_tanggal = $this->input->post("pada_tanggal");
+		$nama_ayah = $this->input->post("nama_ayah");
+		$nama_ibu = $this->input->post("nama_ibu");
+		$telp_ortu = $this->input->post("telp_orangtua");
+		$kerja_ayah = $this->input->post("kerja_ayah");
+		$kerja_ibu = $this->input->post("kerja_ibu");
+		$alamat_orangtua = $this->input->post("alamat_orangtua");
+		$nama_wali = $this->input->post("nama_wali");
+		$telp_wali = $this->input->post("telp_wali");
+		$pekerjaan_wali = $this->input->post("pekerjaan_wali");
+		$alamat_wali = $this->input->post("alamat_wali");
+
+		$data = [
+			"nama" => $nama_siswa,
+			"absen" => $absensi,
+			"alamat_siswa" => $alamat_siswa,
+			"nisn" => $nisn,
+			"nis" => $nis,
+			"semester" => $semester,
+			"sekolah" => $sekolah,
+			"tahun_pelajaran" => $tahun_pelajaran,
+			"tempat_lahir" =>$tempat_lahir,
+			"tanggal_lahir" => $tanggal_lahir,
+			"kelamin" => $kelamin,
+			"telp_siswa" => $telp_siswa,
+			"agama" => $agama,
+			"status_keluarga" => $status_keluarga,
+			"anak_ke" => $anak_ke,
+			"sekolah_asal" => $sekolah_asal,
 			"kelas" => $kelas,
 			"pada_kelas" => $pada_kelas,
 			"pada_tanggal" => $pada_tanggal,
@@ -300,32 +575,110 @@ public function add_kelas_ix()
 
 		return redirect(base_url('tabel_siswa_ix'));
 }
-
-public function edit_guru(){
-		$this->load->model('guru_model', 'gm');
-		// $id = $this->input->post('id_guru');
-		$id = $this->uri->segment(1);
-		$nama_guru = $this->input->post('nama');
-		$jabatan = $this->input->post('jabatan');
-		$nikg = $this->input->post('nikg');
-		$data = [
-            'nama' => $nama_guru,
-            'jabatan' => $jabatan,
-            'nikg' => $nikg,
-		];
-		$this->gm->update_entry($data, $id);
-		redirect(base_url('tabel'));
-		// echo json_encode(true);
+public function detail_kelas_ix()
+{
+		$this->db->where('id_nilai', $this->input->get('id_nilai'));
+		$data = $this->db->get('nilai_siswa', ['kelas' => '9'])->result();
+		echo json_encode($data);
 }
-public function hapus_guru(){
-	$this->load->model("guru_model", "gm");
-		
-		$id = $this->input->post("id_guru");
+public function edit_kelas_ix()
+{
+	$this->load->model("siswa_ix_model", "s9");
+	    $id = $this->input->post('id_nilai');
+		$nama_siswa = $this->input->post("nama");
+		$absensi = $this->input->post("absen");
+		$kelas = $this->input->post("kelas");
+		$nisn = $this->input->post("nisn");
+		$nis = $this->input->post("nis");
+		$semester = $this->input->post("semester");
+		$sekolah = $this->input->post("sekolah");
+		$tahun_pelajaran = $this->input->post("tahun_pelajaran");
+		$tempat_lahir = $this->input->post("tempat_lahir");
+		$tanggal_lahir = $this->input->post("tanggal_lahir");
+		$kelamin = $this->input->post('kelamin');
+		$telp_siswa = $this->input->post('telp_siswa');
+		$agama = $this->input->post("agama");
+		$status_keluarga = $this->input->post("status_keluarga");
+		$anak_ke = $this->input->post("anak_ke");
+		$alamat_siswa = $this->input->post("alamat_siswa");
+		$sekolah_asal = $this->input->post("sekolah_asal");
+		$pada_kelas = $this->input->post("pada_kelas");
+		$pada_tanggal = $this->input->post("pada_tanggal");
+		$nama_ayah = $this->input->post("nama_ayah");
+		$nama_ibu = $this->input->post("nama_ibu");
+		$telp_ortu = $this->input->post("telp_orangtua");
+		$kerja_ayah = $this->input->post("kerja_ayah");
+		$kerja_ibu = $this->input->post("kerja_ibu");
+		$alamat_orangtua = $this->input->post("alamat_orangtua");
+		$nama_wali = $this->input->post("nama_wali");
+		$telp_wali = $this->input->post("telp_wali");
+		$pekerjaan_wali = $this->input->post("pekerjaan_wali");
+		$alamat_wali = $this->input->post("alamat_wali");
 
 		$data = [
-			"id_guru" => $id,
+			"nama" => $nama_siswa,
+			"absen" => $absensi,
+			"alamat_siswa" => $alamat_siswa,
+			"nisn" => $nisn,
+			"nis" => $nis,
+			"semester" => $semester,
+			"sekolah" => $sekolah,
+			"tahun_pelajaran" => $tahun_pelajaran,
+			"tempat_lahir" =>$tempat_lahir,
+			"tanggal_lahir" => $tanggal_lahir,
+			"kelamin" => $kelamin,
+			"telp_siswa" => $telp_siswa,
+			"agama" => $agama,
+			"status_keluarga" => $status_keluarga,
+			"anak_ke" => $anak_ke,
+			"sekolah_asal" => $sekolah_asal,
+			"kelas" => $kelas,
+			"pada_kelas" => $pada_kelas,
+			"pada_tanggal" => $pada_tanggal,
+			"nama_ayah" => $nama_ayah,
+			"nama_ibu" => $nama_ibu,
+			"telp_orangtua" => $telp_ortu,
+			"kerja_ayah" => $kerja_ayah,
+			"kerja_ibu" => $kerja_ibu,
+			"alamat_orangtua" => $alamat_orangtua,
+			"nama_wali" => $nama_wali,
+			"telp_wali" => $telp_wali,
+			"pekerjaan_wali" => $pekerjaan_wali,
+			"alamat_wali" => $alamat_wali,
 		];
-		$this->gm->delete($data);
+
+		$this->s9->update_entry($data, $id);
+		redirect(base_url('tabel_siswa_ix'));
+}
+	public function hapus_kelas_ix()
+	{
+		$this->load->model("siswa_ix_model", "s9");
+
+		$id = $this->input->post("id_nilai");
+		$this->s9->delete($id);
+		echo json_encode(true);
+	}
+
+public function detail_mapel()
+{
+		$this->db->where('id_mapel', $this->input->get('id_mapel'));
+		$data = $this->db->get('mata_pelajaran')->result();
+		echo json_encode($data);
+}
+
+public function edit_mapel(){
+		$this->load->model('mapel_model', 'mm');
+		// $id = $this->input->post('id_guru');
+		$id = $this->input->post('id_mapel');
+		$guru = $this->input->post('guru_mapel');
+		$kkm = $this->input->post('kkm');
+		$data = [
+            'guru_mapel' => $guru,
+            'kkm' => $kkm,
+		];
+		// var_dump($id, $data);
+		$this->mm->update_entry($data, $id);
+		redirect(base_url('tabel_mapel'));
 		echo json_encode(true);
 }
 }

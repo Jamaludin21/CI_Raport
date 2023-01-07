@@ -1,6 +1,5 @@
      <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Home extends CI_Controller {
 
 	public function __construct()
@@ -146,19 +145,40 @@ class Home extends CI_Controller {
 		$this->load->view('menu/tabel/siswa_ix', $data);
 	}
 	public function form(){
-
-		$this->load->view('menu/form');
+		$data = [
+			'data_nilai' => $this->fm->get_data(),
+		 ];
+		$this->load->view('menu/form' , $data);
 	}
 	public function nilai(){
 		     $data = [
-				'nilai' => $this->fm->get()
+				'nilai' => $this->fm->get(),
 		     ];
 		$this->load->view('menu/tabel/nilai', $data);
 	}
-	public function cetak(){
+	public function cetak($id){
 		     $data = [
-				'cetak_nilai' => $this->db->get('nilai_siswa')->result(),
+				'cetak_nilai' => $this->fm->cetak_nilai($id),
+				"source_gambar" => "../assets/images/icon/logoypii.jpg",
 			 ];
-		     $this->load->view('menu/cetak', $data);
+
+		    //  var_dump($data);
+		    //  die;
+
+			//  $this->load->library('dompdf_gen');
+			 $this->load->view('menu/cetak', $data);
+             $customPaper = 'A3';
+             $orientation = 'portrait';
+			$html = $this->output->get_output();
+			$this->load->library('pdfgenerator');
+			 $this->pdfgenerator->generate_view($html, strtoupper("DATA NILAI SISWA ").$id, TRUE, $customPaper, $orientation);
+
+
+			 
+			//  $html = ob_get_contents();
+			//   ob_end_clean();
+			//  $pdf = new Spipu\Html2Pdf\Html2Pdf('P','A4','en');
+			//  $pdf->WriteHTML($html);
+			//  $pdf->Output('Raport SMP YPII Bungur Bekasi.pdf', 'D');
 	}
 }

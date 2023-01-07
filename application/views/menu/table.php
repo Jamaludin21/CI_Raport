@@ -12,6 +12,7 @@
 
     <!-- Title Page-->
     <title>Daftar Guru</title>
+	<link rel="icon" type="image/x-icon" href="<?= base_url(); ?>assets/images/icon/logoypii.jpeg">
 
     <!-- Fontfaces CSS-->
     <link href="<?= base_url('assets/css/font-face.css"'); ?>" rel="stylesheet" media="all">
@@ -200,44 +201,27 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                alt="John Doe" />
+                                            <img src="assets/images/icon/logoypii.jpeg" alt="YPII" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <!-- <a class="js-acc-btn"
+                                                href="#"><?php echo $this->session->userdata("username"); ?></a> -->
+                                            <a> SMP YPII</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                            alt="John Doe" />
+                                                        <img src="<?= base_url(); ?>assets/images/icon/logoypii.jpeg"
+                                                            alt="YPII" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a> SMP YPII</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">smpypiibungur@gmail.com</span>
                                                 </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div> -->
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +231,7 @@
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
+            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -288,12 +272,12 @@
                                                 <td><?= $row->jabatan ?></td>
                                                 <td><?= $row->nikg ?></td>
                                                 <td><?= $row->mata_pelajaran ?></td>
-                                                <td><button type="button" class="btn btn-outline-success"
-                                                        data-toggle="modal" data-target="#editModal">
+                                                <td><button type="button" class="btn btn-outline-success btn_edit_guru"
+                                                        data="<?= $row->id_guru ?>">
                                                         <i class="fas fa-plus"></i> Edit
                                                     </button>
                                                     <button type="button" class="btn btn-outline-danger"
-                                                        onclick="deleted()">
+                                                        onclick="deleted(<?= $row->id_guru ?>)">
                                                         <i class="fas fa-trash"></i> Hapus
                                                     </button>
                                                 </td>
@@ -326,22 +310,19 @@
                                     <div class="form-group">
                                         <label for="name">Nama</label>
                                         <input type="text" class="form-control" placeholder="Masukkan Nama" name="nama"
-                                            autofocus autocomplete="off" id="nama_guru"
-                                            value="<?= set_value('nama_guru') ?>">
+                                            autofocus autocomplete="off" id="nama_guru">
                                         <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="jabatan">Jabatan Guru</label>
                                         <input type="text" class="form-control" placeholder="Masukkan Jabatan"
-                                            name="jabatan" autofocus autocomplete="off" id="jabatan"
-                                            value="<?= set_value('jabatan') ?>">
+                                            name="jabatan" autofocus autocomplete="off" id="jabatan">
                                         <?= form_error('jabatan', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="nikg">NIKG</label>
                                         <input type="number" class="form-control" placeholder="Masukkan NIKG"
-                                            name="nikg" autofocus autocomplete="off" id="nikg"
-                                            value="<?= set_value('nikg') ?>">
+                                            name="nikg" autofocus autocomplete="off" id="nikg">
                                         <?= form_error('nikg', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <!-- </form> -->
@@ -373,20 +354,21 @@
                                     <form action="<?= base_url('edit_guru'); ?>" method="POST">
                                         <div class="form-group">
                                             <label for="name">Nama</label>
+                                            <input type="hidden" name="id_guru" id="id_guru" class="form-control">
                                             <input type="text" class="form-control" placeholder="Masukkan Nama"
-                                                name="nama" autofocus autocomplete="off" id="nama_guru" value="">
+                                                name="nama" autofocus autocomplete="off" id="nama_guru_edit" value="">
                                             <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="jabatan">Jabatan Guru</label>
                                             <input type="text" class="form-control" placeholder="Masukkan Jabatan"
-                                                name="jabatan" autofocus autocomplete="off" id="jabatan" value="">
+                                                name="jabatan" autofocus autocomplete="off" id="jabatan_edit" value="">
                                             <?= form_error('jabatan', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="nikg">NIKG</label>
                                             <input type="number" class="form-control" placeholder="Masukkan NIKG"
-                                                name="nikg" autofocus autocomplete="off" id="nikg" value="">
+                                                name="nikg" autofocus autocomplete="off" id="nikg_edit" value="">
                                             <?= form_error('nikg', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="modal-footer">
@@ -503,7 +485,7 @@
             type: "POST",
             dataType: "JSON",
             data: {
-                "nama_guru": nama,
+                "nama": nama,
                 "jabatan": jabatan,
                 "nikg": nikg
             },
@@ -534,9 +516,9 @@
 
                 if (results) {
                     Swal.fire(
-                        'Success!',
+                        'Berhasil!',
                         'Data telah ditambahkan!',
-                        'success'
+                        'Berhasil'
                     );
 
                     setTimeout(() => {
@@ -547,7 +529,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Email has been taken'
+                        text: 'Nama Guru sudah ada'
                     })
                 }
 
@@ -555,16 +537,40 @@
         })
     }
 
-    function deleted() {
-        let id = $("#id_guru").val();
+
+    $(document).on('click', '.btn_edit_guru', function() {
+        let id = $(this).attr('data');
+        $.ajax({
+            url: '<?= base_url("Ajax/detail_guru"); ?>',
+            type: 'GET',
+            dataType: 'JSON',
+            data: {
+                "id_guru": id,
+            },
+            success: results => {
+                console.log(results);
+                $('#nama_guru_edit').val(results[0].nama);
+                $('#jabatan_edit').val(results[0].jabatan);
+                $('#nikg_edit').val(results[0].nikg);
+                $('#id_guru').val(id);
+
+                $('#editModal').modal('show');
+            }
+        });
+
+
+    });
+
+    function deleted(id) {
+        // let id = $("#id_guru").val();
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Apa anda yakin?',
+            text: "Anda tidak bisa membatalkan ini!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Ya, Hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -577,9 +583,9 @@
                     },
                     success: results => {
                         Swal.fire(
-                            'Deleted!',
-                            'This buyer has been deleted.',
-                            'success'
+                            'Terhapus!',
+                            'Data Guru Telah Dihapus.',
+                            'Berhasil'
                         )
 
                         setTimeout(() => {

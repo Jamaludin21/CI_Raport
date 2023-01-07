@@ -10,7 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Daftar Siswa Kelas IX</title>
+    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>assets/images/icon/logoypii.jpeg">
 
     <!-- Fontfaces CSS-->
     <link href="<?= base_url('assets/css/font-face.css"'); ?>" rel="stylesheet" media="all">
@@ -47,7 +48,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.php">
-                            <img src="<?= base_url(); ?>images/icon/km4.png" alt="KampusMengajar" />
+                            <img src="<?= base_url(); ?>assets/images/icon/km4.png" alt="KampusMengajar" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -202,44 +203,27 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                alt="John Doe" />
+                                            <img src="assets/images/icon/logoypii.jpeg" alt="YPII" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <!-- <a class="js-acc-btn"
+                                                href="#"><?php echo $this->session->userdata("username"); ?></a> -->
+                                            <a> SMP YPII</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                            alt="John Doe" />
+                                                        <img src="<?= base_url(); ?>assets/images/icon/logoypii.jpeg"
+                                                            alt="YPII" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a> SMP YPII</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">smpypiibungur@gmail.com</span>
                                                 </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div> -->
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +233,7 @@
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
+            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -271,8 +255,13 @@
                                         <thead>
                                             <tr style="text-align: center;">
                                                 <th>Nama Siswa</th>
+                                                <th>No. Absen</th>
                                                 <th>NIS</th>
                                                 <th>NISN</th>
+                                                <th>Semester</th>
+                                                <th>Sekolah</th>
+                                                <th>Tahun Pelajaran</th>
+                                                <th>Alamat</th>
                                                 <th>Tempat Lahir</th>
                                                 <th>Tanggal Lahir</th>
                                                 <th>Kelamin</th>
@@ -294,14 +283,20 @@
                                                 <th>Alamat Wali</th>
                                                 <th>No. HP Wali</th>
                                                 <th>Pekerjaan Wali</th>
+                                                <th>Tindakan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach($siswa_ix as $row) : ?>
                                             <tr style="text-align: center;">
                                                 <td><?= $row->nama ?></td>
+                                                <td><?= $row->absen ?></td>
                                                 <td><?= $row->nis ?></td>
                                                 <td><?= $row->nisn ?></td>
+                                                <td><?= $row->semester ?></td>
+                                                <td><?= $row->sekolah ?></td>
+                                                <td><?= $row->tahun_pelajaran ?></td>
+                                                <td><?= $row->alamat_siswa ?></td>
                                                 <td><?= $row->tempat_lahir ?></td>
                                                 <td><?= $row->tanggal_lahir ?></td>
                                                 <td><?= $row->kelamin ?></td>
@@ -323,6 +318,16 @@
                                                 <td><?= $row->alamat_wali ?></td>
                                                 <td><?= $row->telp_wali ?></td>
                                                 <td><?= $row->pekerjaan_wali ?></td>
+                                                <td><button type="button"
+                                                        class="btn btn-outline-success btn_edit_siswa_ix"
+                                                        data="<?= $row->id_nilai ?>">
+                                                        <i class="fas fa-plus"></i> Edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-danger"
+                                                        onclick="deleted(<?= $row->id_nilai ?>)">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </button>
+                                                </td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -359,6 +364,13 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
+                                                    <label for="absen" class="control-label mb-1">Nomor Absen</label>
+                                                    <input id="absen" name="absen" type="number" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
                                                     <label for="kelas" class="control-label mb-1">Kelas</label>
                                                     <input id="kelas" name="kelas" type="number" class="form-control"
                                                         aria-required="true" aria-invalid="false">
@@ -380,6 +392,28 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
+                                                    <label for="semester" class="control-label mb-1">Semester</label>
+                                                    <input id="semester" name="semester" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="sekolah" class="control-label mb-1">Sekolah</label>
+                                                    <input id="sekolah" name="sekolah" type="text" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="tahun_pelajaran" class="control-label mb-1">Tahun
+                                                        Pelajaran</label>
+                                                    <input id="tahun_pelajaran" name="tahun_pelajaran" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
                                                     <label for="tempat_lahir" class="control-label mb-1">Tempat
                                                         Lahir</label>
                                                     <input id="tempat_lahir" name="tempat_lahir" type="text"
@@ -391,6 +425,21 @@
                                                     <label for="tanggal_lahir" class="control-label mb-1">Tanggal
                                                         Lahir</label>
                                                     <input id="tanggal_lahir" name="tanggal_lahir" type="date"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="kelamin" class="control-label mb-1">Kelamin</label>
+                                                    <input id="kelamin" name="kelamin" type="text" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="telp_siswa" class="control-label mb-1">No. HP
+                                                        Siswa</label>
+                                                    <input id="telp_siswa" name="telp_siswa" type="number"
                                                         class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                             </div>
@@ -557,6 +606,249 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Edit -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Ubah Data Siswa Kelas IX</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form action="<?= base_url('edit_kelas_ix'); ?>" method="post">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <input type="hidden" name="id_nilai" id="id_nilai"
+                                                        class="form-control">
+                                                    <label for="nama" class="control-label mb-1">Nama Siswa</label>
+                                                    <input id="name_edit" name="nama" type="text" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="absen" class="control-label mb-1">Nomor Absen</label>
+                                                    <input id="absen_edit" name="absen" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="kelas" class="control-label mb-1">Kelas</label>
+                                                    <input id="kelas_edit" name="kelas" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="nisn" class="control-label mb-1">NISN</label>
+                                                    <input id="nisn_edit" name="nisn" type="number" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="nis" class="control-label mb-1">NIS</label>
+                                                    <input id="nis_edit" name="nis" type="number" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="semester" class="control-label mb-1">Semester</label>
+                                                    <input id="semester_edit" name="semester" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="sekolah" class="control-label mb-1">Sekolah</label>
+                                                    <input id="sekolah_edit" name="sekolah" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="tahun_pelajaran" class="control-label mb-1">Tahun
+                                                        Pelajaran</label>
+                                                    <input id="tahun_pelajaran_edit" name="tahun_pelajaran" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="tempat_lahir" class="control-label mb-1">Tempat
+                                                        Lahir</label>
+                                                    <input id="tempat_lahir_edit" name="tempat_lahir" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="tanggal_lahir" class="control-label mb-1">Tanggal
+                                                        Lahir</label>
+                                                    <input id="tanggal_lahir_edit" name="tanggal_lahir" type="date"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="kelamin" class="control-label mb-1">Kelamin</label>
+                                                    <input id="kelamin_edit" name="kelamin" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="telp_siswa" class="control-label mb-1">No. HP
+                                                        Siswa</label>
+                                                    <input id="telp_siswa_edit" name="telp_siswa" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="agama" class="control-label mb-1">Agama</label>
+                                                    <input id="agama_edit" name="agama" type="text" class="form-control"
+                                                        aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="status_keluarga" class="control-label mb-1">Status Dalam
+                                                        Keluarga</label>
+                                                    <input id="status_keluarga_edit" name="status_keluarga" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="anak_ke" class="control-label mb-1">Anak Ke</label>
+                                                    <input id="anak_ke_edit" name="anak_ke" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="sekolah_asal" class="control-label mb-1">Sekolah
+                                                        Asal</label>
+                                                    <input id="sekolah_asal_edit" name="sekolah_asal" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat_siswa" class="control-label mb-1">Alamat Siswa</label>
+                                            <textarea id="alamat_siswa_edit" name="alamat_siswa" type="text"
+                                                class="form-control" aria-required="true" aria-invalid="false">
+												</textarea>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="acc" class="control-label mb-1"><strong>Diterima
+                                                            Disekolah</strong></label>
+                                                    <br>
+                                                    <label for="pada_kelas" class="control-label mb-1">Dikelas</label>
+                                                    <input id="pada_kelas_edit" name="pada_kelas" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="pada_tanggal" class="control-label mb-1">Pada
+                                                        Tanggal</label>
+                                                    <input id="pada_tanggal_edit" name="pada_tanggal" type="date"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="orang_tua" class="control-label mb-1"><strong>Nama Orang
+                                                            Tua</strong></label>
+                                                    <br>
+                                                    <label for="nama_ayah" class="control-label mb-1">Nama Ayah</label>
+                                                    <input id="nama_ayah_edit" name="nama_ayah" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="nama_ibu" class="control-label mb-1">Nama Ibu</label>
+                                                    <input id="nama_ibu_edit" name="nama_ibu" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="telp_orangtua" class="control-label mb-1">No.HP Orang
+                                                        Tua</label>
+                                                    <input id="telp_orangtua_edit" name="telp_orangtua" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="kerja_ayah" class="control-label mb-1">Pekerjaan
+                                                        Ayah</label>
+                                                    <input id="kerja_ayah_edit" name="kerja_ayah" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="kerja_ibu" class="control-label mb-1">Pekerjaan
+                                                        Ibu</label>
+                                                    <input id="kerja_ibu_edit" name="kerja_ibu" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat_orangtua" class="control-label mb-1">Alamat
+                                                Orang Tua</label>
+                                            <textarea id="alamat_orangtua_edit" name="alamat_orangtua" type="text"
+                                                class="form-control" aria-required="true" aria-invalid="false">
+												</textarea>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="nama_wali" class="control-label mb-1">Nama Wali</label>
+                                                    <input id="nama_wali_edit" name="nama_wali" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="telp_wali" class="control-label mb-1">No.HP Wali</label>
+                                                    <input id="telp_wali_edit" name="telp_wali" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="pekerjaan_wali" class="control-label mb-1">Pekerjaan
+                                                        Wali</label>
+                                                    <input id="pekerjaan_wali_edit" name="pekerjaan_wali" type="text"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat_wali" class="control-label mb-1">Alamat
+                                                Wali</label>
+                                            <textarea id="alamat_wali_edit" name="alamat_wali" type="text"
+                                                class="form-control" aria-required="true" aria-invalid="false">
+												</textarea>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary" name="submit">Simpan</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </div>
@@ -576,29 +868,118 @@
     </div>
 
     <!-- Jquery JS-->
-    <script src="assets/vendor/jquery-3.2.1.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="assets/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="assets/vendor/slick/slick.min.js">
+    <script src="<?= base_url(); ?>assets/vendor/slick/slick.min.js">
     </script>
-    <script src="assets/vendor/wow/wow.min.js"></script>
-    <script src="assets/vendor/animsition/animsition.min.js"></script>
-    <script src="assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="<?= base_url(); ?>assets/vendor/wow/wow.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/animsition/animsition.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="assets/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="assets/vendor/counter-up/jquery.counterup.min.js">
+    <script src="<?= base_url(); ?>assets/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="assets/vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="assets/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="assets/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="assets/vendor/select2/select2.min.js">
+    <script src="<?= base_url(); ?>assets/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/select2/select2.min.js">
     </script>
 
     <!-- Main JS-->
-    <script src="assets/js/main.js"></script>
+    <script src="<?= base_url(); ?>assets/js/main.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+    $(document).on('click', '.btn_edit_siswa_ix', function() {
+        let id = $(this).attr('data');
+        $.ajax({
+            url: '<?= base_url("Ajax/detail_kelas_ix"); ?>',
+            type: 'GET',
+            dataType: 'JSON',
+            data: {
+                "id_nilai": id,
+            },
+            success: results => {
+                console.log(results);
+                $('#name_edit').val(results[0].nama);
+                $('#absen_edit').val(results[0].absen);
+                $('#kelas_edit').val(results[0].kelas);
+                $('#nisn_edit').val(results[0].nisn);
+                $('#nis_edit').val(results[0].nis);
+                $('#semester_edit').val(results[0].semester);
+                $('#sekolah_edit').val(results[0].sekolah);
+                $('#tahun_pelajaran_edit').val(results[0].tahun_pelajaran);
+                $('#tempat_lahir_edit').val(results[0].tempat_lahir);
+                $('#tanggal_lahir_edit').val(results[0].tanggal_lahir);
+                $('#kelamin_edit').val(results[0].kelamin);
+                $('#telp_siswa_edit').val(results[0].telp_siswa);
+                $('#agama_edit').val(results[0].agama);
+                $('#status_keluarga_edit').val(results[0].status_keluarga);
+                $('#anak_ke_edit').val(results[0].anak_ke);
+                $('#sekolah_asal_edit').val(results[0].sekolah_asal);
+                $('#alamat_siswa_edit').val(results[0].alamat_siswa);
+                $('#pada_kelas_edit').val(results[0].pada_kelas);
+                $('#pada_tanggal_edit').val(results[0].pada_tanggal);
+                $('#nama_ayah_edit').val(results[0].nama_ayah);
+                $('#nama_ibu_edit').val(results[0].nama_ibu);
+                $('#nama_guru_edit').val(results[0].nama);
+                $('#telp_orangtua_edit').val(results[0].telp_orangtua);
+                $('#kerja_ayah_edit').val(results[0].kerja_ayah);
+                $('#kerja_ibu_edit').val(results[0].kerja_ibu);
+                $('#alamat_orangtua_edit').val(results[0].alamat_orangtua);
+                $('#nama_wali_edit').val(results[0].nama_wali);
+                $('#telp_wali_edit').val(results[0].telp_wali);
+                $('#pekerjaan_wali_edit').val(results[0].pekerjaan_wali);
+                $('#alamat_wali_edit').val(results[0].alamat_wali);
+                $('#id_nilai').val(id);
+
+                $('#editModal').modal('show');
+            }
+        });
+
+
+    });
+
+    function deleted(id) {
+        // let id = $("#id_guru").val();
+        Swal.fire({
+            title: 'Apa anda yakin?',
+            text: "Anda tidak bisa membatalkan ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: '<?= base_url("delete_kelas_ix"); ?>',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: {
+                        "id_nilai": id,
+                    },
+                    success: results => {
+                        Swal.fire(
+                            'Terhapus!',
+                            'Data Siswa Kelas IX Telah Dihapus.',
+                            'Berhasil'
+                        )
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+
+            }
+        })
+    }
+    </script>
 </body>
 
 </html>

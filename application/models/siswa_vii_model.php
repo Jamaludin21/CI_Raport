@@ -130,21 +130,23 @@ public function rules()
 
 public function get()
 {
-		return $this->db->get_where('siswa_viii', ['kelas' => 7])->result();
+	return $this->db->order_by('absen', 'asc')->get_where('nilai_siswa' , ['kelas' => '7'])->result();
+		// return $this->db->select('*')->from('nilai_siswa')->join('ms_kelas', 'ms_kelas.kd_kelas = nilai_siswa.kelas')->get();
 }
 
 public function insert_entry($data)
 {
-	return $this->db->insert('siswa_viii', $data);
+	return $this->db->insert('nilai_siswa', $data);
 }
 
-public function update_entry()
+public function update_entry($data, $id)
 {
-		// $this->title    = $_POST['title'];
-		// $this->content  = $_POST['content'];
-		// $this->date     = time();
-
-		// $this->db->update('entries', $this, array('id' => $_POST['id']));
+	$this->db->where('id_nilai', $id);
+	$this->db->update('nilai_siswa', $data);
+}
+public function delete($id){
+	$this->db->where('id_nilai', $id);
+	$this->db->delete('nilai_siswa');
 }
 
 }

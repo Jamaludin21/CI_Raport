@@ -10,7 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Daftar Mata Pelajaran</title>
+    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>assets/images/icon/logoypii.jpeg">
 
     <!-- Fontfaces CSS-->
     <link href="<?= base_url('assets/css/font-face.css"'); ?>" rel="stylesheet" media="all">
@@ -202,44 +203,27 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                alt="John Doe" />
+                                            <img src="assets/images/icon/logoypii.jpeg" alt="YPII" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <!-- <a class="js-acc-btn"
+                                                href="#"><?php echo $this->session->userdata("username"); ?></a> -->
+                                            <a> SMP YPII</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                            alt="John Doe" />
+                                                        <img src="<?= base_url(); ?>assets/images/icon/logoypii.jpeg"
+                                                            alt="YPII" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a> SMP YPII</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">smpypiibungur@gmail.com</span>
                                                 </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div> -->
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +233,7 @@
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
+            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -280,70 +264,14 @@
                                                 <td><?= $row->guru_mapel ?></td>
                                                 <td><?= $row->kode_mapel ?></td>
                                                 <td><?= $row->kkm ?></td>
-                                                <td><button type="button" class="btn btn-outline-success"
-                                                        data-toggle="modal" data-target="#editModal">
+                                                <td><button type="button" class="btn btn-outline-success btn_edit_mapel"
+                                                        data="<?= $row->id_mapel ?>">
                                                         <i class="fas fa-plus"></i> Edit
                                                     </button>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
-                                            <!-- <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>100397</td>
-                                                <td>Samsung S8 Black</td>
-                                                <td class="text-right">$756.00</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$756.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>100396</td>
-                                                <td>Game Console Controller</td>
-                                                <td class="text-right">$22.00</td>
-                                                <td class="text-right">2</td>
-                                                <td class="text-right">$44.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-26 23:06</td>
-                                                <td>100395</td>
-                                                <td>iPhone X 256Gb Black</td>
-                                                <td class="text-right">$1199.00</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$1199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-25 19:03</td>
-                                                <td>100393</td>
-                                                <td>USB 3.0 Cable</td>
-                                                <td class="text-right">$10.00</td>
-                                                <td class="text-right">3</td>
-                                                <td class="text-right">$30.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>100392</td>
-                                                <td>Smartwatch 4.0 LTE Wifi</td>
-                                                <td class="text-right">$199.00</td>
-                                                <td class="text-right">6</td>
-                                                <td class="text-right">$1494.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-24 19:10</td>
-                                                <td>100391</td>
-                                                <td>Camera C430W 4k</td>
-                                                <td class="text-right">$699.00</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$699.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-22 00:43</td>
-                                                <td>100393</td>
-                                                <td>USB 3.0 Cable</td>
-                                                <td class="text-right">$10.00</td>
-                                                <td class="text-right">3</td>
-                                                <td class="text-right">$30.00</td>
-                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -351,6 +279,46 @@
                         </div>
                     </div>
                     <!-- END DATA TABLE-->
+                </div>
+            </div>
+            <!-- modal edit -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Ubah Data Guru</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form action="<?= base_url('edit_mapel'); ?>" method="POST">
+                                        <div class="form-group">
+                                            <label for="guru">Guru Pelajaran</label>
+                                            <input type="hidden" name="id_mapel" id="id_mapel" class="form-control">
+                                            <input type="text" class="form-control" placeholder="Masukkan Guru"
+                                                name="guru_mapel" autofocus autocomplete="off" id="guru_mapel_edit" value="">
+                                            <?= form_error('guru', '<small class="text-danger pl-3">', '</small>'); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kkm">KKM</label>
+                                            <input type="number" class="form-control" placeholder="Masukkan KKM"
+                                                name="kkm" autofocus autocomplete="off" id="kkm_edit" value="">
+                                            <?= form_error('kkm', '<small class="text-danger pl-3">', '</small>'); ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Tutup</button>
+                                            <button type="submit" class="btn btn-primary" name="submit">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -392,6 +360,29 @@
     <!-- Main JS-->
     <script src="assets/js/main.js"></script>
 
+    <script>
+    $(document).on('click', '.btn_edit_mapel', function() {
+        let id = $(this).attr('data');
+        $.ajax({
+            url: '<?= base_url("Ajax/detail_mapel"); ?>',
+            type: 'GET',
+            dataType: 'JSON',
+            data: {
+                "id_mapel": id,
+            },
+            success: results => {
+                console.log(results);
+                $('#guru_mapel_edit').val(results[0].guru_mapel);
+                $('#kkm_edit').val(results[0].kkm);
+                $('#id_mapel').val(id);
+
+                $('#editModal').modal('show');
+            }
+        });
+
+
+    });
+    </script>
 </body>
 
 </html>

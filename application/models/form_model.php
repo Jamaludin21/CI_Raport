@@ -6,7 +6,7 @@ public function rules()
     {
         return [
             [
-                'field' => 'nama_siswa',  //samakan dengan atribute name pada tags input
+                'field' => 'nama',  //samakan dengan atribute name pada tags input
                 'label' => 'Nama',  // label yang kan ditampilkan pada pesan error
                 'rules' => 'trim|required' //rules validasi
             ],
@@ -202,8 +202,49 @@ public function rules()
             ],
         ];
     }
-public function get()
+// public function get()
+// {
+// 		return $this->db->order_by('kelas', 'ASC')->order_by('absen', 'ASC')->get('nilai_siswa')->result();
+// // 		$this->db->select('*');
+// // $this->db->from('siswa_viii');
+// // $this->db->join('nilai_siswa', 'siswa_viii.id = nilai_siswa.id');
+// // 		$this->db->get('siswa_viii', $id);
+// }
+
+public function get_data(){
+	return $this->db->group_by('kelas')->order_by('kelas','ASC')->get('nilai_siswa')->result_array();
+}
+
+public function get_data_absen_vii(){
+	// $this->db->select('*');
+	// $this->db->from('nilai_siswa');
+	// 	$this->db->join('ms_kelas', 'ms_kelas.keter = nilai_siswa.kelas');
+	// $this->db->where('kelas', $id);
+	// $this->db->group_by('kelas');
+	return $this->db->order_by('kelas','ASC')->get_where('nilai_siswa', ['kelas' => 7])->result();
+}
+
+public function get_data_absen_viii(){
+	// $this->db->select('*');
+	// $this->db->from('nilai_siswa');
+	// 	$this->db->join('ms_kelas', 'ms_kelas.keter = nilai_siswa.kelas');
+	// $this->db->where('kelas', $id);
+	// $this->db->group_by('kelas');
+	return $this->db->order_by('kelas','ASC')->get_where('nilai_siswa', ['kelas' => 8])->result();
+}
+
+public function get_data_absen_ix(){
+	// $this->db->select('*');
+	// $this->db->from('nilai_siswa');
+	// 	$this->db->join('ms_kelas', 'ms_kelas.keter = nilai_siswa.kelas');
+	// $this->db->where('kelas', $id);
+	// $this->db->group_by('kelas');
+	return $this->db->order_by('kelas','ASC')->get_where('nilai_siswa', ['kelas' => 9])->result();
+}
+
+public function cetak_nilai($id)
 {
+		$this->db->where('id_nilai', $id);
 		return $this->db->get('nilai_siswa')->result();
 }
 
@@ -213,23 +254,23 @@ public function insert_entry($data)
 	return $this->db->insert('nilai_siswa', $data);
 	
 }
-public function get_where($id)
-{
-		$this->db->where('id_guru', $id);
-		$data = $this->db->get('guru')->result();
+// public function get_where($id)
+// {
+// 		$this->db->where('id_guru', $id);
+// 		$data = $this->db->get('guru')->result();
 
-		$update = [];
-		foreach ($data as $key) {
-			$guru = [
-				"namaguru" => $key->nama_guru,
-				"jabatan" => $key->jabatan,
-				"nikg" => $key->nikg,
-			];
-			array_push($update, $guru);
-		}
-		return $update;
+// 		$update = [];
+// 		foreach ($data as $key) {
+// 			$guru = [
+// 				"namaguru" => $key->nama_guru,
+// 				"jabatan" => $key->jabatan,
+// 				"nikg" => $key->nikg,
+// 			];
+// 			array_push($update, $guru);
+// 		}
+// 		return $update;
 
-}
+// }
 // public function update_entry()
 // {
 // 		// $this->title    = $_POST['title'];
@@ -245,8 +286,8 @@ public function get_where($id)
 //         );
 //         return $this->db->update('guru', $data, array('id_guru' => $this->input->post('id_guru')));
 // }
-public function delete($id){
-	$this->db->delete('guru', array('id_guru' => $id));
-}
+// public function delete($id){
+// 	$this->db->delete('guru', array('id_guru' => $id));
+// }
 }
 ?>

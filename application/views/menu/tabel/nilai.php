@@ -11,7 +11,8 @@
     <meta name=”csrf-token” content=”{{ csrf_token() }}” />
 
     <!-- Title Page-->
-    <title>Daftar Guru</title>
+    <title>Daftar Nilai Siswa</title>
+    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>assets/images/icon/logoypii.jpeg">
 
     <!-- Fontfaces CSS-->
     <link href="<?= base_url('assets/css/font-face.css"'); ?>" rel="stylesheet" media="all">
@@ -203,44 +204,27 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                alt="John Doe" />
+                                            <img src="assets/images/icon/logoypii.jpeg" alt="YPII" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <!-- <a class="js-acc-btn"
+                                                href="#"><?php echo $this->session->userdata("username"); ?></a> -->
+                                            <a> SMP YPII</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<?= base_url(); ?>assets/images/icon/avatar-01.jpg"
-                                                            alt="John Doe" />
+                                                        <img src="<?= base_url(); ?>assets/images/icon/logoypii.jpeg"
+                                                            alt="YPII" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a> SMP YPII</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">smpypiibungur@gmail.com</span>
                                                 </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div> -->
-                                                <!-- <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +234,7 @@
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
+            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -274,6 +258,7 @@
                                         <thead>
                                             <tr style="text-align: center;">
                                                 <th>Nama Siswa</th>
+                                                <th>No. Absen</th>
                                                 <th>Kelas</th>
                                                 <th>NISN</th>
                                                 <th>Semester</th>
@@ -318,20 +303,21 @@
                                         <tbody>
                                             <?php foreach($nilai as $row) : ?>
                                             <tr style="text-align: center;">
-                                                <td><?= $row->nama_siswa ?></td>
+                                                <td><?= $row->nama ?></td>
+                                                <td><?= $row->absen ?></td>
                                                 <td><?= $row->kelas ?></td>
                                                 <td><?= $row->nisn ?></td>
                                                 <td><?= $row->semester ?></td>
                                                 <td><?= $row->sekolah ?></td>
                                                 <td><?= $row->tahun_pelajaran ?></td>
-                                                <td><?= $row->alamat ?></td>
+                                                <td><?= $row->alamat_siswa ?></td>
                                                 <td><?= $row->taqwa ?></td>
                                                 <td><?= $row->mandiri ?></td>
                                                 <td><?= $row->gotong_royong ?></td>
                                                 <td><?= $row->kreatif ?></td>
                                                 <td><?= $row->kritis ?></td>
                                                 <td><?= $row->bineka ?></td>
-                                                <td><?= $row->agama ?></td>
+                                                <td><?= $row->na_agama ?></td>
                                                 <td><?= $row->kompetensi_agama ?></td>
                                                 <td><?= $row->pkn ?></td>
                                                 <td><?= $row->kompetensi_pkn ?></td>
@@ -357,10 +343,11 @@
                                                 <td><?= $row->izin ?></td>
                                                 <td><?= $row->tanpa_keterangan ?></td>
                                                 <td><?= $row->catatan_wakel ?></td>
-                                                <td><button type="button" class="btn btn-outline-success"
-                                                        onclick="window.print()">
-                                                        <i class="fas fa-plus"></i> Cetak
-                                                    </button></td>
+                                                <td><a class="btn btn-outline-success"
+                                                        href="<?= base_url()?>cetak/<?= $row->id_nilai ?>"
+                                                        target="_blank">
+                                                        <i class="fas fa-print"></i> Cetak
+                                                    </a></td>
                                                 <!-- <td style="text-align: center;"><?= $row->nikg ?></td>
                                                 <td><button type="button" class="btn btn-outline-success"
                                                         data-toggle="modal" data-target="#editModal">
@@ -421,137 +408,6 @@
     <!-- Main JS-->
     <script src="<?= base_url(); ?>assets/js/main.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-    function postdata() {
-        let nama = $("#nama_guru").val();
-        let jabatan = $("#jabatan").val();
-        let nikg = $("#nikg").val();
-
-        if (nama == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Nama Harus Diisi!'
-            });
-
-            return false;
-        }
-
-        if (jabatan == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Jabatan Harus Diisi!'
-            });
-
-            return false;
-        }
-
-        if (nikg == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'NIKG Harus Diisi!'
-            });
-
-            return false;
-        }
-
-        $.ajax({
-            url: "<?= base_url("add_guru") ?>",
-            type: "POST",
-            dataType: "JSON",
-            data: {
-                "nama_guru": nama,
-                "jabatan": jabatan,
-                "nikg": nikg
-            },
-            // beforeSend: () => {
-            //     Swal.fire({
-            //         title: 'Please Wait...',
-            //         html: '',
-            //         timer: 10000,
-            //         timerProgressBar: true,
-            //         didOpen: () => {
-            //             Swal.showLoading()
-            //             const b = Swal.getHtmlContainer().querySelector('b')
-            //             timerInterval = setInterval(() => {
-            //                 b.textContent = Swal.getTimerLeft()
-            //             }, 100)
-            //         },
-            //         willClose: () => {
-            //             clearInterval(timerInterval)
-            //         }
-            //     }).then((result) => {
-            //         /* Read more about handling dismissals below */
-            //         if (result.dismiss === Swal.DismissReason.timer) {
-            //             console.log('I was closed by the timer')
-            //         }
-            //     })
-            // },
-            success: results => {
-
-                if (results) {
-                    Swal.fire(
-                        'Success!',
-                        'Data telah ditambahkan!',
-                        'success'
-                    );
-
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
-                } else {
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Email has been taken'
-                    })
-                }
-
-            }
-        })
-    }
-
-    function deleted() {
-        let id = $("#id_guru").val();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                $.ajax({
-                    url: '<?= base_url("delete_guru"); ?>',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data: {
-                        "id_guru": id,
-                    },
-                    success: results => {
-                        Swal.fire(
-                            'Deleted!',
-                            'This buyer has been deleted.',
-                            'success'
-                        )
-
-                        setTimeout(() => {
-                            location.reload();
-                        }, 1000);
-                    }
-                });
-
-            }
-        })
-    }
-    </script>
 
 </body>
 
