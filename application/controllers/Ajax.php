@@ -60,35 +60,22 @@ public function hapus_guru(){
 		echo json_encode(true);
 }
 
-
-public function detail_kelas_absen()
-{
-	    $this->load->model("form_model", "fm");
-		// $this->db->where('id_nilai', $this->input->get('id_nilai'));
-		// $data = $this->db->get('nilai_siswa')->result();
-		// echo json_encode($data);
-		// $id = $this->input->post('id_nilai');
-		$data = $this->fm->get_data_absen_vii();
-		$data = $this->fm->get_data_absen_viii();
-		$data = $this->fm->get_data_absen_ix();
-		echo json_encode($data);
-}
-
 public function detail_form()
 {
-	    $this->load->model("form_model", "fm");
-		$this->db->where('id_nilai', $this->input->get('id_nilai'));
-		$data = $this->db->get('nilai_siswa')->result();
+	$data = [
+		$this->load->model("form_model", "fm"),
+		$this->fm->get_data_absen()->result_array()
+	];
 		echo json_encode($data);
 }
 
-public function detail_absen()
-{
-	    $this->load->model("form_model", "fm");
-		$this->db->where('id_nilai', $this->input->get('id_nilai'));
-		$data = $this->db->get('nilai_siswa')->result();
-		echo json_encode($data);
-}
+// public function detail_absen()
+// {
+// 	    $this->load->model("form_model", "fm");
+// 		$this->db->where('id_kelas', $this->input->get('id_kelas'));
+// 		$data = $this->db->get('nilai_siswa')->result();
+// 		echo json_encode($data);
+// }
 public function add_form()
 {
 		$this->load->model("form_model", "fm");
@@ -267,7 +254,7 @@ public function add_kelas_vii()
 public function detail_kelas_vii()
 {
 		$this->db->where('id_nilai', $this->input->get('id_nilai'));
-		$data = $this->db->get('nilai_siswa', ['kelas' => '7'])->result();
+		$data = $this->db->get_where('nilai_siswa', ['id_kelas' => '1'])->result();
 		echo json_encode($data);
 }
 public function edit_kelas_vii()

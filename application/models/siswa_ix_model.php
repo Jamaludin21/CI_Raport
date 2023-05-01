@@ -129,7 +129,7 @@ class Siswa_ix_model extends CI_Model {
 
 	public function get()
 	{
-		return $this->db->order_by('absen', 'asc')->get_where('nilai_siswa' , ['kelas' => '9'])->result();
+		return $this->db->get_where('nilai_siswa', ['id_kelas' => '3'])->result();
 	}
 	
 	public function insert_entry($data)

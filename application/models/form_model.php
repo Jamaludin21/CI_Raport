@@ -202,44 +202,26 @@ public function rules()
             ],
         ];
     }
-// public function get()
-// {
-// 		return $this->db->order_by('kelas', 'ASC')->order_by('absen', 'ASC')->get('nilai_siswa')->result();
+public function get()
+{
+		return $this->db->order_by('kelas','ASC')->get('nilai_siswa')->result();
 // // 		$this->db->select('*');
 // // $this->db->from('siswa_viii');
 // // $this->db->join('nilai_siswa', 'siswa_viii.id = nilai_siswa.id');
 // // 		$this->db->get('siswa_viii', $id);
-// }
+}
 
 public function get_data(){
-	return $this->db->group_by('kelas')->order_by('kelas','ASC')->get('nilai_siswa')->result_array();
+	return $this->db->group_by('keterangan')->order_by('keterangan','ASC')->get('ms_kelas')->result_array();
 }
-
-public function get_data_absen_vii(){
-	// $this->db->select('*');
-	// $this->db->from('nilai_siswa');
-	// 	$this->db->join('ms_kelas', 'ms_kelas.keter = nilai_siswa.kelas');
-	// $this->db->where('kelas', $id);
-	// $this->db->group_by('kelas');
-	return $this->db->order_by('kelas','ASC')->get_where('nilai_siswa', ['kelas' => 7])->result();
-}
-
-public function get_data_absen_viii(){
-	// $this->db->select('*');
-	// $this->db->from('nilai_siswa');
-	// 	$this->db->join('ms_kelas', 'ms_kelas.keter = nilai_siswa.kelas');
-	// $this->db->where('kelas', $id);
-	// $this->db->group_by('kelas');
-	return $this->db->order_by('kelas','ASC')->get_where('nilai_siswa', ['kelas' => 8])->result();
-}
-
-public function get_data_absen_ix(){
-	// $this->db->select('*');
-	// $this->db->from('nilai_siswa');
-	// 	$this->db->join('ms_kelas', 'ms_kelas.keter = nilai_siswa.kelas');
-	// $this->db->where('kelas', $id);
-	// $this->db->group_by('kelas');
-	return $this->db->order_by('kelas','ASC')->get_where('nilai_siswa', ['kelas' => 9])->result();
+public function get_data_absen(){
+			$this->db->select('*');
+			$this->db->from('ms_kelas');
+			$this->db->join('nilai_siswa', 'ms_kelas.id_kelas = nilai_siswa.id_kelas');
+		$query = $this->db->order_by('absen asc, keterangan asc')->get();
+		return $query;
+		
+	// return $this->db->group_by('id_kelas')->order_by('absen','ASC')->get('nilai_siswa')->result_array();
 }
 
 public function cetak_nilai($id)

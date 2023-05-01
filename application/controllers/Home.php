@@ -147,6 +147,7 @@ class Home extends CI_Controller {
 	public function form(){
 		$data = [
 			'data_nilai' => $this->fm->get_data(),
+			'data_absen' => $this->fm->get_data_absen()
 		 ];
 		$this->load->view('menu/form' , $data);
 	}

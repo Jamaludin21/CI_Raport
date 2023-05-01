@@ -255,7 +255,7 @@
                                         <thead>
                                             <tr style="text-align: center;">
                                                 <th>Nama Siswa</th>
-												<th>No. Absen</th>
+                                                <th>No. Absen</th>
                                                 <th>NIS</th>
                                                 <th>NISN</th>
                                                 <th>Semester</th>
@@ -290,7 +290,7 @@
                                             <?php foreach($siswa_vii as $row) : ?>
                                             <tr style="text-align: center;">
                                                 <td><?= $row->nama ?></td>
-												<td><?= $row->absen ?></td>
+                                                <td><?= $row->absen ?></td>
                                                 <td><?= $row->nis ?></td>
                                                 <td><?= $row->nisn ?></td>
                                                 <td><?= $row->semester ?></td>
@@ -306,7 +306,7 @@
                                                 <td><?= $row->alamat_siswa ?></td>
                                                 <td><?= $row->telp_siswa ?></td>
                                                 <td><?= $row->tanggal_lahir ?></td>
-                                                <td><?= $row->kelas ?></td>
+                                                <td><?= $row->id_kelas ?></td>
                                                 <td><?= $row->pada_tanggal ?></td>
                                                 <td><?= $row->nama_ayah ?></td>
                                                 <td><?= $row->nama_ibu ?></td>
@@ -362,7 +362,7 @@
                                                         aria-required="true" aria-invalid="false">
                                                 </div>
                                             </div>
-											<div class="col-6">
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="absen" class="control-label mb-1">Nomor Absen</label>
                                                     <input id="absen" name="absen" type="number" class="form-control"
@@ -605,11 +605,11 @@
                                                         aria-required="true" aria-invalid="false">
                                                 </div>
                                             </div>
-											<div class="col-6">
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="absen" class="control-label mb-1">Nomor Absen</label>
-                                                    <input id="absen_edit" name="absen" type="number" class="form-control"
-                                                        aria-required="true" aria-invalid="false">
+                                                    <input id="absen_edit" name="absen" type="number"
+                                                        class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -879,7 +879,7 @@
             success: results => {
                 console.log(results);
                 $('#name_edit').val(results[0].nama);
-				$('#absen_edit').val(results[0].absen);
+                $('#absen_edit').val(results[0].absen);
                 $('#kelas_edit').val(results[0].kelas);
                 $('#nisn_edit').val(results[0].nisn);
                 $('#nis_edit').val(results[0].nis);
