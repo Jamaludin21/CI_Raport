@@ -174,7 +174,7 @@ public function add_kelas_vii()
 	$this->load->model("siswa_vii_model", "s7");
 		
 
-		$nama_siswa = $this->input->post("nama");
+		$nama_siswa = $this->input->post("nama_siswa");
 		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
@@ -207,7 +207,7 @@ public function add_kelas_vii()
 		// $kd_kelas = "K-00" . rand();
 
 		$data = [
-			"nama" => $nama_siswa,
+			"nama_siswa" => $nama_siswa,
 			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
@@ -261,7 +261,7 @@ public function edit_kelas_vii()
 {
 	$this->load->model("siswa_vii_model", "s7");
 	    $id = $this->input->post('id_nilai');
-		$nama_siswa = $this->input->post("nama");
+		$nama_siswa = $this->input->post("nama_siswa");
 		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
@@ -292,7 +292,7 @@ public function edit_kelas_vii()
 		$alamat_wali = $this->input->post("alamat_wali");
 
 		$data = [
-			"nama" => $nama_siswa,
+			"nama_siswa" => $nama_siswa,
 			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
@@ -339,7 +339,7 @@ public function add_kelas_viii()
 	$this->load->model("siswa_vii_model", "s8");
 		
 
-		$nama_siswa = $this->input->post("nama");
+		$nama_siswa = $this->input->post("nama_siswa");
 		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
@@ -370,7 +370,7 @@ public function add_kelas_viii()
 		$alamat_wali = $this->input->post("alamat_wali");
 
 		$data = [
-			"nama" => $nama_siswa,
+			"nama_siswa" => $nama_siswa,
 			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
@@ -416,7 +416,7 @@ public function edit_kelas_viii()
 {
 	$this->load->model("siswa_viii_model", "s8");
 	    $id = $this->input->post('id_nilai');
-		$nama_siswa = $this->input->post("nama");
+		$nama_siswa = $this->input->post("nama_siswa");
 		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
@@ -447,7 +447,7 @@ public function edit_kelas_viii()
 		$alamat_wali = $this->input->post("alamat_wali");
 
 		$data = [
-			"nama" => $nama_siswa,
+			"nama_siswa" => $nama_siswa,
 			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
@@ -495,7 +495,7 @@ public function add_kelas_ix()
 	$this->load->model("siswa_vii_model", "s9");
 		
 
-		$nama_siswa = $this->input->post("nama");
+		$nama_siswa = $this->input->post("nama_siswa");
 		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
@@ -526,7 +526,7 @@ public function add_kelas_ix()
 		$alamat_wali = $this->input->post("alamat_wali");
 
 		$data = [
-			"nama" => $nama_siswa,
+			"nama_siswa" => $nama_siswa,
 			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,
@@ -572,7 +572,7 @@ public function edit_kelas_ix()
 {
 	$this->load->model("siswa_ix_model", "s9");
 	    $id = $this->input->post('id_nilai');
-		$nama_siswa = $this->input->post("nama");
+		$nama_siswa = $this->input->post("nama_siswa");
 		$absensi = $this->input->post("absen");
 		$kelas = $this->input->post("kelas");
 		$nisn = $this->input->post("nisn");
@@ -603,7 +603,7 @@ public function edit_kelas_ix()
 		$alamat_wali = $this->input->post("alamat_wali");
 
 		$data = [
-			"nama" => $nama_siswa,
+			"nama_siswa" => $nama_siswa,
 			"absen" => $absensi,
 			"alamat_siswa" => $alamat_siswa,
 			"nisn" => $nisn,

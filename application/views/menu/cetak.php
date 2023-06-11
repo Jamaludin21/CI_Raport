@@ -44,11 +44,12 @@
 <head>
     <h2 style="text-align:center;">RAPOR SISWA<br>SEKOLAH MENENGAH PERTAMA<br>(SMP)</h2>
     <a>
-        <img src="https://www.smpn1dbn.sch.id/wp-content/uploads/2021/07/smpn1-dobana.png" style="width:10em; height:10vw" />
+        <img src="https://www.smpn1dbn.sch.id/wp-content/uploads/2021/07/smpn1-dobana.png"
+            style="width:10em; height:10vw" />
     </a>
     <?php foreach($cetak_nilai as $lock) : ?>
     <P style="text-align:center;font-weight:bold;">Nama Peserta Didik</P>
-    <h3 style="text-align:center;border: 1px black solid" ;font-weight:bold;><?= $lock->nama ?></h3>
+    <h3 style="text-align:center;border: 1px black solid" ;font-weight:bold;><?= $lock->nama_siswa ?></h3>
     <P style="text-align:center;font-weight:bold;">NIS/NISN</P>
     <P style="text-align:center;border: 1px black solid;font-weight:bold;"><?= $lock->nisn ?></P>
 </head>
@@ -64,7 +65,7 @@
             <tbody style=" background-color:blue;font-size:smaller;">
                 <tr>
                     <td>Nama Siswa (Lengkap)</td>
-                    <td>: <strong><?= $lock->nama ?></strong></td>
+                    <td>: <strong><?= $lock->nama_siswa ?></strong></td>
                 </tr>
 
                 <tr>
@@ -214,7 +215,7 @@
                 <tbody>
                     <tr>
                         <td>Nama</td>
-                        <td>: <?= $lock->nama ?></td>
+                        <td>: <?= $lock->nama_siswa ?></td>
                         <td class="pembatas"></td>
                         <td style="margin-left:6rem">Kelas</td>
                         <td>: <?= $lock->kelas ?></td>
@@ -235,7 +236,7 @@
                     </tr>
                     <tr>
                         <td style="vertical-align:text-top">Alamat</td>
-                        <td colspan="4" style="vertical-align:text-top">: <?= $lock->alamat ?></td>
+                        <td colspan="4" style="vertical-align:text-top">: <?= $lock->alamat_siswa ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -299,13 +300,13 @@
                 <tr>
                     <td>1</td>
                     <td>Pendidikan Agama dan Budi Pekerti</td>
-                    <td><?= $lock->agama ?></td>
+                    <td><?= $lock->na_agama ?></td>
                     <td><?= $lock->kompetensi_agama ?></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Pendidikan Pancasila dan Kewarganegaraan</td>
-                    <td><?= $lock->pkn ?></td>
+                    <td><?= $lock->na_pkn ?></td>
                     <td><?= $lock->kompetensi_pkn ?></td>
                 </tr>
                 <tr>

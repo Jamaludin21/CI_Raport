@@ -130,7 +130,7 @@ public function rules()
 
 public function get()
 {
-	return $this->db->get_where('nilai_siswa' , ['id_kelas' => '1'])->result();
+	return $this->db->get_where('nilai_siswa' , ['kelas' => '7'])->result();
 		// return $this->db->select('*')->from('nilai_siswa')->join('ms_kelas', 'ms_kelas.kd_kelas = nilai_siswa.kelas')->get();
 }
 

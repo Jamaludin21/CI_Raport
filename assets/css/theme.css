@@ -1761,6 +1761,10 @@ section {
     color: #4272d7;
 }
 
+.header-mobile .navbar-mobile .navbar-mobile__list li.active > a {
+	color: #4272d7;
+}
+
 .header-mobile .navbar-mobile .navbar-mobile__list li a > i {
     margin-right: 19px;
 }

@@ -212,17 +212,18 @@ public function get()
 }
 
 public function get_data(){
-	return $this->db->group_by('keterangan')->order_by('keterangan','ASC')->get('ms_kelas')->result_array();
+	// return $this->db->group_by('kelas')->order_by('absen','ASC')->get('nilai_siswa')->result_array();
+		return $this->db->group_by('kelas')->get('nilai_siswa')->result_array();
 }
-public function get_data_absen(){
-			$this->db->select('*');
-			$this->db->from('ms_kelas');
-			$this->db->join('nilai_siswa', 'ms_kelas.id_kelas = nilai_siswa.id_kelas');
-		$query = $this->db->order_by('absen asc, keterangan asc')->get();
-		return $query;
+// public function get_data_absen(){
+// 			$this->db->select('*');
+// 			$this->db->from('ms_kelas');
+// 			$this->db->join('nilai_siswa', 'ms_kelas.id_kelas = nilai_siswa.id_kelas');
+// 		$query = $this->db->order_by('absen asc, keterangan asc')->get();
+// 		return $query;
 		
-	// return $this->db->group_by('id_kelas')->order_by('absen','ASC')->get('nilai_siswa')->result_array();
-}
+// 	// return $this->db->group_by('id_kelas')->order_by('absen','ASC')->get('nilai_siswa')->result_array();
+// }
 
 public function cetak_nilai($id)
 {

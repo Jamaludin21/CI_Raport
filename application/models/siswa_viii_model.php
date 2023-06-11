@@ -128,7 +128,7 @@ class Siswa_viii_model extends CI_Model {
 	}
 	public function get()
 	{
-		return $this->db->get_where('nilai_siswa', ['id_kelas' => '2'])->result();
+		return $this->db->get_where('nilai_siswa', ['kelas' => '8'])->result();
 	}
 	
 	public function insert_entry($data)

@@ -12,7 +12,9 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"dompdf/dompdf": "^2.0"
+		"dompdf/dompdf": "^2.0",
+		"ministryofweb/image-fix-exif-orientation": "*",
+		"paragonie/random_compat": "*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

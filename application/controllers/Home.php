@@ -24,8 +24,10 @@ class Home extends CI_Controller {
 			'siswa_ix' => $this->s9->get(),
 			// 'me'   => $users,
 		];
-
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/index' ,$data);
+		$this->load->view('layout/footer');
 	}
 	    //  public function login()
 	    //  {
@@ -96,7 +98,10 @@ class Home extends CI_Controller {
 			// 'update_guru' => $this->gm->update_entry(),
 			// 'hapus_guru' => $this->gm->delete($id),
 		];
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/table', $data);
+		$this->load->view('layout/footer');
 	}
 
 	// public function add_tabel(){
@@ -121,41 +126,65 @@ class Home extends CI_Controller {
 		$data = [
 			'mapel' => $this->mm->get(),
 		];
+		
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/tabel/mapel', $data);
+		$this->load->view('layout/footer');
 	}
 	public function tabel_siswa_vii(){
 		$data = [
 			'siswa_vii' => $this->s7->get(),
 			// 'nilai_vii' => $this->db->get_where('nilai_siswa', ['kelas' => 7])->result(),
 		];
+		
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/tabel/siswa_vii', $data);
+		$this->load->view('layout/footer');
 	}
 	public function tabel_siswa_viii(){
 		$data = [
 			'siswa_viii' => $this->s8->get(),
 			// 'nilai_viii' => $this->db->get_where('nilai_siswa', ['kelas' => 8])->result(),
 		];
+		
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/tabel/siswa_viii', $data);
+		$this->load->view('layout/footer');
 	}
 	public function tabel_siswa_ix(){
 		$data = [
 			'siswa_ix' => $this->s9->get(),
 			// 'nilai_ix' => $this->db->get_where('nilai_siswa', ['kelas' => 9])->result(),
 		];
+		
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/tabel/siswa_ix', $data);
+		$this->load->view('layout/footer');
 	}
 	public function form(){
 		$data = [
 			'data_nilai' => $this->fm->get_data(),
-			'data_absen' => $this->fm->get_data_absen()
+			// 'data_absen' => $this->fm->get_data_absen()
 		 ];
+		
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/form' , $data);
+		$this->load->view('layout/footer');
 	}
 	public function nilai(){
 		     $data = [
 				'nilai' => $this->fm->get(),
 		     ];
+		
+		$this->load->view('layout/header' ,$data);
+		$this->load->view('layout/side' ,$data);
 		$this->load->view('menu/tabel/nilai', $data);
+		$this->load->view('layout/footer');
 	}
 	public function cetak($id){
 		     $data = [
@@ -167,11 +196,13 @@ class Home extends CI_Controller {
 		    //  die;
 
 			//  $this->load->library('dompdf_gen');
+			
 			 $this->load->view('menu/cetak', $data);
-             $customPaper = 'A3';
+		
+             $customPaper = 'A4';
              $orientation = 'portrait';
-			$html = $this->output->get_output();
-			$this->load->library('pdfgenerator');
+			 $html = $this->output->get_output();
+			 $this->load->library('pdfgenerator');
 			 $this->pdfgenerator->generate_view($html, strtoupper("DATA NILAI SISWA ").$id, TRUE, $customPaper, $orientation);
 
 
