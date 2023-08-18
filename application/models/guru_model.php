@@ -36,23 +36,6 @@ public function insert_entry($data)
 	return $this->db->insert('guru', $data);
 	
 }
-// public function get_where($id)
-// {
-// 		$this->db->where('id_guru', $id);
-// 		$data = $this->db->get('guru')->result();
-
-// 		$update = [];
-// 		foreach ($data as $key) {
-// 			$guru = [
-// 				"namaguru" => $key->nama_guru,
-// 				"jabatan" => $key->jabatan,
-// 				"nikg" => $key->nikg,
-// 			];
-// 			array_push($update, $guru);
-// 		}
-// 		return $update;
-
-// }
 public function update_entry($data,$id)
 {
 		$this->db->where('id_guru', $id);
@@ -63,4 +46,3 @@ public function delete($id){
 	$this->db->delete('guru');
 }
 }
-?>

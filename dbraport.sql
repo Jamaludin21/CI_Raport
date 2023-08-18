@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2022 at 02:15 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Aug 18, 2023 at 04:16 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL,
   `username` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -39,6 +39,26 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 (1, 'jamaludin21', 'bungur');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `biodata_siswa`
+--
+
+CREATE TABLE `biodata_siswa` (
+  `id_siswa` int(11) NOT NULL,
+  `nama_siswa` varchar(225) NOT NULL,
+  `id_kelas` int(11) DEFAULT NULL,
+  `absen` int(11) NOT NULL,
+  `agama` int(11) NOT NULL,
+  `nis` int(11) NOT NULL,
+  `nisn` int(11) NOT NULL,
+  `semester` int(11) NOT NULL,
+  `lulusan_sekolah` int(11) NOT NULL,
+  `tahun_pelajaran` int(11) NOT NULL,
+  `alamat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,7 +74,7 @@ CREATE TABLE `dimensi` (
   `kreatif` varchar(225) NOT NULL,
   `bernalar_kritis` varchar(225) NOT NULL,
   `bhineka` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dimensi`
@@ -73,27 +93,26 @@ CREATE TABLE `guru` (
   `id_guru` int(11) NOT NULL,
   `nama` varchar(225) NOT NULL,
   `jabatan` varchar(225) NOT NULL,
-  `mata_pelajaran` varchar(50) NOT NULL,
   `nikg` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `guru`
 --
 
-INSERT INTO `guru` (`id_guru`, `nama`, `jabatan`, `mata_pelajaran`, `nikg`) VALUES
-(1, 'Ihsan Permadi, S.Pd', 'Kepala Sekolah', 'Pendidikan Agama', ''),
-(2, 'Tri Cahya Ningrum, S.Pd', 'Wk. Kurikulum', 'Matematika', '1345772673230163'),
-(3, 'Hasyemi Rofsanjani Haikal, S.E', 'Wk. Kesiswaan', 'BK', ''),
-(4, 'Mahda Chika Calista, S.Pd', 'Bendahara', 'BTQ', ''),
-(5, 'Dyah Okasari, S.Pd', 'Guru', 'Bahasa Inggris', '9648758659300050'),
-(6, 'Panji Sutowo, S.Pd', 'Guru', 'IPA', ''),
-(7, 'Nining Marini, S.Pd', 'Tata Usaha', 'IPS', '9637770671230252'),
-(8, 'Fenty Noviati Rahayu', 'Guru', 'Bahasa Indonesia', ''),
-(9, 'Ali Ridho, S.Pd', 'Guru', 'Seni Budaya', '9452758660200023'),
-(10, 'Asep Saepullah, S.T', 'Guru', 'Prakarya & Bahasa Sunda', '2749757658110042'),
-(11, 'M. Syahril Azhari, S.Fil.I', 'Guru', 'Pendiidkan Kewarganegaraan', '2536757657200013'),
-(12, 'Makosid Fauzi', 'Operator', '', '1056752655200013');
+INSERT INTO `guru` (`id_guru`, `nama`, `jabatan`, `nikg`) VALUES
+(1, 'Ihsan Permadi, S.Pd', 'Kepala Sekolah', ''),
+(2, 'Tri Cahya Ningrum, S.Pd', 'Wk. Kurikulum', '1345772673230163'),
+(3, 'Hasyemi Rofsanjani Haikal, S.E', 'Wk. Kesiswaan', ''),
+(4, 'Mahda Chika Calista, S.Pd', 'Bendahara', ''),
+(5, 'Dyah Okasari, S.Pd', 'Guru', '9648758659300050'),
+(6, 'Panji Sutowo, S.Pd', 'Guru', ''),
+(7, 'Nining Marini, S.Pd', 'Tata Usaha', '9637770671230252'),
+(8, 'Fenty Noviati Rahayu', 'Guru', ''),
+(9, 'Ali Ridho, S.Pd', 'Guru', '9452758660200023'),
+(10, 'Asep Saepullah, S.T', 'Guru', '2749757658110042'),
+(11, 'M. Syahril Azhari, S.Fil.I', 'Guru', '2536757657200013'),
+(12, 'Makosid Fauzi', 'Operator', '1056752655200013');
 
 -- --------------------------------------------------------
 
@@ -104,28 +123,48 @@ INSERT INTO `guru` (`id_guru`, `nama`, `jabatan`, `mata_pelajaran`, `nikg`) VALU
 CREATE TABLE `mata_pelajaran` (
   `id_mapel` int(11) NOT NULL,
   `nama_mapel` varchar(225) NOT NULL,
-  `guru_mapel` varchar(225) NOT NULL,
+  `id_guru` int(11) DEFAULT NULL,
   `kode_mapel` varchar(225) NOT NULL,
   `kkm` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mata_pelajaran`
 --
 
-INSERT INTO `mata_pelajaran` (`id_mapel`, `nama_mapel`, `guru_mapel`, `kode_mapel`, `kkm`) VALUES
-(1, 'Pendidikan Agama', 'Ihsan Permadi, S.Pd', '1', ''),
-(2, 'Pendidikan Kewarganegaraan', 'M. Syahril Azhari, S.Fil.I', '3', ''),
-(3, 'Bahasa Indonesia', 'Fenty Noviati Rahayu', '7', ''),
-(4, 'Matematika', 'Tri Cahya Ningrum, S.Pd', '2', ''),
-(5, 'Ilmu Pengetahuan Alam', 'Panji Sutowo, S.Pd', '9', ''),
-(6, 'Ilmu Pengetahuan Sosial', 'Nining Marini, S.Pd', '5', ''),
-(7, 'Bahasa Inggris', 'Dyah Okasari, S.Pd', '6', ''),
-(8, 'Seni Budaya', 'Ali Rido, S.Sos.I', '3', ''),
-(9, 'Pendidikan Jasmani', '', '11', ''),
-(10, 'Prakarya', 'Asep Saepullah, S.T', '8a', ''),
-(11, 'Bahasa Sunda', 'Asep Saepullah, S.T', '8b', ''),
-(12, 'Baca Tulis Quran', 'Mahda Chika Calista, S.Pd', '10', '');
+INSERT INTO `mata_pelajaran` (`id_mapel`, `nama_mapel`, `id_guru`, `kode_mapel`, `kkm`) VALUES
+(1, 'Pendidikan Agama', 1, '1', ''),
+(2, 'Pendidikan Kewarganegaraan', 11, '3', ''),
+(3, 'Bahasa Indonesia', 8, '7', ''),
+(4, 'Matematika', 2, '2', ''),
+(5, 'Ilmu Pengetahuan Alam', 6, '9', ''),
+(6, 'Ilmu Pengetahuan Sosial', 7, '5', ''),
+(7, 'Bahasa Inggris', 5, '6', ''),
+(8, 'Seni Budaya', 10, '3', ''),
+(9, 'Pendidikan Jasmani', NULL, '11', ''),
+(10, 'Prakarya', 10, '8a', ''),
+(11, 'Bahasa Sunda', 9, '8b', ''),
+(12, 'Baca Tulis Quran', 4, '10', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ms_kelas`
+--
+
+CREATE TABLE `ms_kelas` (
+  `id_kelas` int(11) NOT NULL,
+  `keterangan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ms_kelas`
+--
+
+INSERT INTO `ms_kelas` (`id_kelas`, `keterangan`) VALUES
+(1, 7),
+(2, 8),
+(3, 9);
 
 -- --------------------------------------------------------
 
@@ -135,21 +174,15 @@ INSERT INTO `mata_pelajaran` (`id_mapel`, `nama_mapel`, `guru_mapel`, `kode_mape
 
 CREATE TABLE `nilai_siswa` (
   `id_nilai` int(11) NOT NULL,
-  `nama_siswa` varchar(225) NOT NULL,
-  `kelas` varchar(225) NOT NULL,
-  `nisn` int(11) NOT NULL,
-  `semester` int(11) NOT NULL,
-  `sekolah` varchar(225) NOT NULL,
-  `tahun_pelajaran` varchar(225) NOT NULL,
-  `alamat` varchar(225) NOT NULL,
+  `id_siswa` int(11) DEFAULT NULL,
   `taqwa` varchar(225) NOT NULL,
   `mandiri` varchar(225) NOT NULL,
   `gotong_royong` varchar(225) NOT NULL,
   `kreatif` varchar(225) NOT NULL,
   `kritis` varchar(225) NOT NULL,
   `bineka` varchar(225) NOT NULL,
-  `agama` varchar(225) NOT NULL,
-  `pkn` varchar(225) NOT NULL,
+  `na_agama` varchar(225) NOT NULL,
+  `na_pkn` varchar(225) NOT NULL,
   `na_bi` varchar(225) NOT NULL,
   `na_mtk` varchar(225) NOT NULL,
   `na_ipa` varchar(225) NOT NULL,
@@ -173,45 +206,8 @@ CREATE TABLE `nilai_siswa` (
   `sakit` int(11) NOT NULL,
   `izin` int(11) NOT NULL,
   `tanpa_keterangan` int(11) NOT NULL,
-  `catatan_wakel` varchar(225) NOT NULL,
-  `id_mapel` int(11) NOT NULL,
-  `id_siswa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `siswa_viii`
---
-
-CREATE TABLE `siswa_viii` (
-  `id_siswa` int(11) NOT NULL,
-  `nis` varchar(225) NOT NULL,
-  `nisn` varchar(50) NOT NULL,
-  `nama` varchar(225) NOT NULL,
-  `kelas` int(11) NOT NULL,
-  `kelamin` varchar(225) NOT NULL,
-  `tempat_lahir` varchar(225) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `agama` varchar(225) NOT NULL,
-  `status_keluarga` varchar(225) NOT NULL,
-  `anak_ke` int(11) NOT NULL,
-  `alamat_siswa` varchar(225) NOT NULL,
-  `telp_siswa` varchar(50) NOT NULL,
-  `sekolah_asal` varchar(225) NOT NULL,
-  `pada_kelas` int(11) NOT NULL,
-  `pada_tanggal` date NOT NULL,
-  `nama_ayah` varchar(50) NOT NULL,
-  `nama_ibu` varchar(225) NOT NULL,
-  `alamat_orangtua` varchar(225) NOT NULL,
-  `telp_orangtua` int(11) NOT NULL,
-  `kerja_ayah` varchar(225) NOT NULL,
-  `kerja_ibu` varchar(225) NOT NULL,
-  `nama_wali` varchar(225) NOT NULL,
-  `alamat_wali` varchar(225) NOT NULL,
-  `telp_wali` varchar(50) NOT NULL,
-  `pekerjaan_wali` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `catatan_wakel` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -222,6 +218,13 @@ CREATE TABLE `siswa_viii` (
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `biodata_siswa`
+--
+ALTER TABLE `biodata_siswa`
+  ADD PRIMARY KEY (`id_siswa`),
+  ADD KEY `kelas` (`id_kelas`);
 
 --
 -- Indexes for table `dimensi`
@@ -239,20 +242,21 @@ ALTER TABLE `guru`
 -- Indexes for table `mata_pelajaran`
 --
 ALTER TABLE `mata_pelajaran`
-  ADD PRIMARY KEY (`id_mapel`);
+  ADD PRIMARY KEY (`id_mapel`),
+  ADD KEY `guru` (`id_guru`);
+
+--
+-- Indexes for table `ms_kelas`
+--
+ALTER TABLE `ms_kelas`
+  ADD PRIMARY KEY (`id_kelas`);
 
 --
 -- Indexes for table `nilai_siswa`
 --
 ALTER TABLE `nilai_siswa`
   ADD PRIMARY KEY (`id_nilai`),
-  ADD KEY `id_siswa` (`id_siswa`);
-
---
--- Indexes for table `siswa_viii`
---
-ALTER TABLE `siswa_viii`
-  ADD PRIMARY KEY (`id_siswa`);
+  ADD KEY `siswa` (`id_siswa`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -263,6 +267,12 @@ ALTER TABLE `siswa_viii`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `biodata_siswa`
+--
+ALTER TABLE `biodata_siswa`
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `dimensi`
@@ -283,16 +293,38 @@ ALTER TABLE `mata_pelajaran`
   MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `ms_kelas`
+--
+ALTER TABLE `ms_kelas`
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `nilai_siswa`
 --
 ALTER TABLE `nilai_siswa`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `siswa_viii`
+-- Constraints for dumped tables
 --
-ALTER TABLE `siswa_viii`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- Constraints for table `biodata_siswa`
+--
+ALTER TABLE `biodata_siswa`
+  ADD CONSTRAINT `kelas` FOREIGN KEY (`id_kelas`) REFERENCES `ms_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `mata_pelajaran`
+--
+ALTER TABLE `mata_pelajaran`
+  ADD CONSTRAINT `guru` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id_guru`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nilai_siswa`
+--
+ALTER TABLE `nilai_siswa`
+  ADD CONSTRAINT `siswa` FOREIGN KEY (`id_siswa`) REFERENCES `biodata_siswa` (`id_siswa`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

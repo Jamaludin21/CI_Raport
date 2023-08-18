@@ -129,23 +129,22 @@ class Siswa_ix_model extends CI_Model {
 
 	public function get()
 	{
-		return $this->db->get_where('nilai_siswa', ['kelas' => '9'])->result();
+		return $this->db->get_where('biodata_siswa', ['id_kelas' => '3'])->result();
 	}
 	
 	public function insert_entry($data)
 	{
-		return $this->db->insert('nilai_siswa', $data);
+		return $this->db->insert('biodata_siswa', $data);
 	}
 	
 	public function update_entry($data, $id)
 	{
 		$this->db->where('id_nilai', $id);
-		$this->db->update('nilai_siswa', $data);
+		$this->db->update('biodata_siswa', $data);
 	}
 	public function delete($id){
 		$this->db->where('id_nilai', $id);
-		$this->db->delete('nilai_siswa');
+		$this->db->delete('biodata_siswa');
 	}
 
 }
-?>
